@@ -101,26 +101,35 @@ public class Main {
 			}
 //		List<int[][]> array = new ArrayList<int[][]>();
 //		 array.add(arr);
-		long start = System.currentTimeMillis();
+//		long start = System.currentTimeMillis();
 //		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "8");
 //	Matrix m = Arrays.stream(new SplitMatrix2(8).split(new Matrix(arr))).parallel().map(n-> new ExecuteFilter2().execute(n)).sequential().reduce(new Matrix(8), (a, b)->a.add(b));
 //		
 		// .collect(Collectors.toList()).size());
 //		System.out.println(System.currentTimeMillis() - start + "ms");
 //
-		MapReduce mapReduce = new MapReduce(1);
-		start = System.currentTimeMillis();
-		Future<Matrix> result = mapReduce.getStream().input(new Matrix(arr));
-		Matrix m = result.get();
-		System.out.println(System.currentTimeMillis() - start + "ms");
+//		MapReduce mapReduce = new MapReduce(1);
+//		start = System.currentTimeMillis();
+//		Future<Matrix> result = mapReduce.getStream().input(new Matrix(arr));
+//		Matrix m = result.get();
+//		System.out.println(System.currentTimeMillis() - start + "ms");
 
 //		start = System.currentTimeMillis();
 //		m = Sequential.compute(new Matrix(arr));
 //		System.out.println(System.currentTimeMillis() - start + "ms");
 
-		File output = new File("pippo.png");
-		ImageIO.write(m.toImage(), "jpg", output);	
+//		File output = new File("pippo.png");
+//		ImageIO.write(m.toImage(), "jpg", output);	
 		
+		MapReduce map = new MapReduce(1);
+		map.testcompute(2, 4000, 4000);
+		map.testcompute(2, 4000, 4000);
+
+		
+		J8MapReduce mapj= new J8MapReduce(4);
+		mapj.testcompute(2, 4000, 4000);
+		mapj.testcompute(2, 4000, 4000);
+
 		System.exit(0);
 
 	}

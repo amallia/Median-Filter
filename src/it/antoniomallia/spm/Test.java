@@ -25,15 +25,15 @@ public class Test {
 					mapreduce.testcompute(SIZE_STREAM, SIZE_ROW, SIZE_COL);
 					mapreduce.shutdown();
 				}
-				// if (args[0].equals("farm")) {
-				// THREADS = Integer.parseInt(args[1]);
-				// SIZE_STREAM = Integer.parseInt(args[2]);
-				// SIZE_ROW = Integer.parseInt(args[3]);
-				// SIZE_COL = Integer.parseInt(args[4]);
-				// ParallelFarm parfarm = new ParallelFarm(THREADS);
-				// parfarm.testcompute(SIZE_STREAM, SIZE_ROW, SIZE_COL);
-				// parfarm.shutdown();
-				// }
+				if (args[0].equals("farm")) {
+					THREADS = Integer.parseInt(args[1]);
+					SIZE_STREAM = Integer.parseInt(args[2]);
+					SIZE_ROW = Integer.parseInt(args[3]);
+					SIZE_COL = Integer.parseInt(args[4]);
+					SkandiumFarm farm = new SkandiumFarm(THREADS);
+					farm.testcompute(SIZE_STREAM, SIZE_ROW, SIZE_COL);
+					farm.shutdown();
+				}
 				// if (args[0].equals("seq")) {
 				// SIZE_STREAM = Integer.parseInt(args[1]);
 				// SIZE_ROW = Integer.parseInt(args[2]);
