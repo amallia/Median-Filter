@@ -24,7 +24,8 @@ public class Matrix {
 
 	public int[][] matrix;
 	int num;
-	int status;
+
+	int rowStart, rowEnd, colStart, colEnd;
 
 	public int getHeight() {
 		return matrix[0].length;
@@ -49,8 +50,8 @@ public class Matrix {
 		for (int i = 0; i < sizeRow; i++) {
 			for (int j = 0; j < sizeCol; j++) {
 				rmat[i][j] = new Color((int) Math.random() * 255,
-						(int) Math.random() * 255,
-						(int) Math.random() * 255).getRGB();
+						(int) Math.random() * 255, (int) Math.random() * 255)
+						.getRGB();
 			}
 		}
 
@@ -132,38 +133,43 @@ public class Matrix {
 	 *            final column index
 	 * @return 2d array of int representing the submatrix
 	 */
-	public int[][] subMatrix(int rowStart, int rowEnd, int colStart, int colEnd) {
+	public Matrix subMatrix(int rowStart, int rowEnd, int colStart, int colEnd) {
 		// Row size of the submatrix
 		int rowSize = rowEnd - rowStart + 1;
 		// Column size of the submatrix
 		int colSize = colEnd - colStart + 1;
 		// Allocate the submatrix, bigger since we need the edge just for
 		// computing median filter
-		int[][] subMatrix = new int[colSize + 2][colSize + 2];
+		Matrix subMatrix = new Matrix(colSize + 2, colSize + 2);
+		subMatrix.rowStart = rowStart;
+		subMatrix.rowEnd = rowEnd;
+		subMatrix.colStart = colStart;
+		subMatrix.colEnd = colEnd;
 		// for each pixel of the extended submatrix
 		if (rowStart == 0) {
 			for (int i = 1; i < rowSize + 1; i++) {
-				subMatrix[i][0] = matrix[i - 1][0];
+				subMatrix.matrix[i][0] = matrix[i - 1][0];
 			}
 		}
 		if (rowEnd == matrix[0].length - 1) {
 			for (int i = 1; i < rowSize + 1; i++) {
-				subMatrix[i][subMatrix[0].length - 1] = matrix[i - 1][matrix[0].length - 1];
+				subMatrix.matrix[i][subMatrix.matrix[0].length - 1] = matrix[i - 1][matrix[0].length - 1];
 			}
 		}
 		if (colStart == 0) {
 			for (int i = 1; i < colSize + 1; i++) {
-				subMatrix[0][i] = matrix[0][i - 1];
+				subMatrix.matrix[0][i] = matrix[0][i - 1];
 			}
 		}
 		if (colEnd == matrix.length - 1) {
 			for (int i = 1; i < colSize + 1; i++) {
-				subMatrix[subMatrix.length - 1][i] = matrix[matrix.length - 1][i - 1];
+				subMatrix.matrix[subMatrix.matrix.length - 1][i] = matrix[matrix.length - 1][i - 1];
 			}
 		}
 		for (int i = 1; i < colSize + 1; i++) {
 			for (int j = 1; j < rowSize + 1; j++) {
-				subMatrix[i][j] = matrix[i + colStart - 1][j + rowStart - 1];
+				subMatrix.matrix[i][j] = matrix[i + colStart - 1][j + rowStart
+						- 1];
 			}
 
 		}
@@ -183,17 +189,15 @@ public class Matrix {
 	}
 
 	public Matrix add(Matrix b) {
-		if (status == 0) {
-			matrix = new int[(num) * (b.matrix[0].length - 2)][(num)
-					* (b.matrix.length - 2)];
-		}
-		for (int i = 1; i < b.matrix.length - 2; i++) {
-			for (int j = 1; j < b.matrix[0].length - 2; j++) {
-				matrix[(status / num) * (b.matrix.length - 2) + i - 1][(status % num)
-						* (b.matrix[0].length - 2) + j - 1] = b.matrix[i][j];
+//long time = System.currentTimeMillis();
+		for (int i = b.colStart; i < b.colEnd + 1; i++) {
+			for (int j = b.rowStart; j < b.rowEnd + 1; j++) {
+				this.matrix[i][j] = b.matrix[i % (b.matrix.length - 2) + 1][j
+						% (b.matrix[0].length - 2) + 1];
 			}
 		}
-		status++;
+//		System.out.println("Reduced over in: "
+//				+ (System.currentTimeMillis() - time));
 		return this;
 	}
 }

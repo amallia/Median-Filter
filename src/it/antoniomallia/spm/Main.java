@@ -1,5 +1,8 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Stats;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.concurrent.Future;
@@ -9,9 +12,6 @@ import javax.imageio.ImageIO;
 import nu.pattern.OpenCV;
 
 import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.highgui.Highgui;
-import org.opencv.imgproc.Imgproc;
 
 public class Main {
 
@@ -90,7 +90,7 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		File f = new File(Main.class.getResource("/im_sp1.png").getPath());
+		File f = new File(Main.class.getResource("/output.png").getPath());
 
 		BufferedImage img = ImageIO.read(f);
 		int[][] arr = new int[img.getWidth()][img.getHeight()];
@@ -109,9 +109,8 @@ public class Main {
 //		System.out.println(System.currentTimeMillis() - start + "ms");
 //
 //		MapReduce mapReduce = new MapReduce(1);
-//		start = System.currentTimeMillis();
-//		Future<Matrix> result = mapReduce.getStream().input(new Matrix(arr));
-//		Matrix m = result.get();
+//		long start = System.currentTimeMillis();
+//	    Matrix m = mapReduce.compute(new Matrix(arr));
 //		System.out.println(System.currentTimeMillis() - start + "ms");
 
 //		start = System.currentTimeMillis();
@@ -120,16 +119,22 @@ public class Main {
 
 //		File output = new File("pippo.png");
 //		ImageIO.write(m.toImage(), "jpg", output);	
+//		
+		SkandiumMapReduce map = new SkandiumMapReduce(4);
+		map.testcompute(1, 4000, 4000);
+		map.testcompute(1, 4000, 4000);
+		map.shutdown();
 		
-		MapReduce map = new MapReduce(1);
-		map.testcompute(2, 4000, 4000);
-		map.testcompute(2, 4000, 4000);
-
+		map = new SkandiumMapReduce(2);
+		map.testcompute(2, 200, 200);
+		map.testcompute(2, 200, 200);
+		map.shutdown();
 		
-		J8MapReduce mapj= new J8MapReduce(4);
-		mapj.testcompute(2, 4000, 4000);
-		mapj.testcompute(2, 4000, 4000);
 
+//		
+//		J8MapReduce mapj= new J8MapReduce(4);
+//		mapj.testcompute(1, 4000, 4000);
+//		mapj.testcompute(1, 4000, 4000);
 		System.exit(0);
 
 	}

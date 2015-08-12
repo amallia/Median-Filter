@@ -12,6 +12,8 @@ public class SplitMatrix implements Split<Matrix, Matrix> {
 
 	@Override
 	public Matrix[] split(Matrix matrix) throws Exception {
+//		long time = System.currentTimeMillis();
+
 		Matrix[] mats = new Matrix[num * num];
 		int rowsize = matrix.getWidth() / num;
 		int colsize = matrix.getHeight() / num;
@@ -25,10 +27,12 @@ public class SplitMatrix implements Split<Matrix, Matrix> {
 				int colStart = i * colsize;
 				int colStop = (i + 1) * colsize - 1;
 
-				mats[num * i + j] = new Matrix(matrix.subMatrix(rowStart,
-						rowStop, colStart, colStop));
+				mats[num * i + j] = matrix.subMatrix(rowStart, rowStop,
+						colStart, colStop);
 			}
 		}
+//		System.out.println("Split over in: "
+//				+ (System.currentTimeMillis() - time));
 		return mats;
 	}
 }

@@ -12,7 +12,8 @@ public class MergeMatrix implements Merge<Matrix, Matrix> {
 
 	@Override
 	public Matrix merge(Matrix[] m) throws Exception {
-		
+//		long time = System.currentTimeMillis();
+
 		int colsize =m[0].getHeight()-2;
 		int rowsize = m[0].getWidth()-2;
 		int[][] res = new int[num*(colsize)][num*(rowsize)];
@@ -25,7 +26,8 @@ public class MergeMatrix implements Merge<Matrix, Matrix> {
 				}
 			}
 		}
-		
+//		System.out.println("Merged over in: "
+//				+ (System.currentTimeMillis() - time));
 		return new Matrix(res);
 	}
 }

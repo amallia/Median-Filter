@@ -1,5 +1,7 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -41,7 +43,7 @@ public class SkandiumFarm {
 		skandium.shutdown();
 	}
 
-	public void testcompute(int streamsize, int sizeRow, int sizeCol)
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws InterruptedException, ExecutionException {
 
 
@@ -70,6 +72,8 @@ public class SkandiumFarm {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
+		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+
 	}
 
 }

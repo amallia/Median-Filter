@@ -1,5 +1,7 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -16,12 +18,12 @@ public class J8MapReduce {
 
 	public Matrix compute(Matrix input) {
 		return Arrays.stream(new SplitMatrix2(threads).split(input)).parallel()
-				.map(n -> new ExecuteFilter2().execute(n)).sequential()
-				.reduce(new Matrix(threads), (a, b) -> a.add(b));
+				.map(n -> new ExecuteFilter2().execute(n))
+				.reduce(new Matrix(input.getHeight(), input.getWidth()), (a, b) -> a.add(b));
 	}
 	
 	
-	public void testcompute(int streamsize, int sizeRow, int sizeCol)
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws InterruptedException, ExecutionException {
 
 		System.out.println("#############################");
@@ -32,15 +34,17 @@ public class J8MapReduce {
 		for (int i = 0; i < streamsize; i++) {
 			initmat[i] = new Matrix(sizeRow, sizeCol);
 		}
+		Matrix[] results = new Matrix[streamsize];
 
 		long time = System.currentTimeMillis();
 
-		Matrix[] results = new Matrix[streamsize];
 		for (int i = 0; i < streamsize; i++) {
 			results[i] = compute(initmat[i]);
 		}
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
+		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+
 	}
 }

@@ -10,6 +10,7 @@ public class SplitMatrix2  {
 	}
 
 	public Matrix[] split(Matrix matrix)  {
+		long time = System.currentTimeMillis();
 		Matrix[] mats = new Matrix[num*num];
 		int rowsize = matrix.getWidth() / num;
 		int colsize = matrix.getHeight() / num;
@@ -17,10 +18,12 @@ public class SplitMatrix2  {
 		for (int i = 0; i < num; i++) {
 			for (int j = 0; j < num; j++) {
 				//System.out.println(j * rowsize+" "+((j + 1) * rowsize - 1)+" "+ i * colsize+" "+ ((i + 1) * colsize-1));
-				mats[num * i + j] = new Matrix(matrix.subMatrix(j * rowsize,
-						(j + 1) * rowsize-1, i * colsize, (i + 1) * colsize-1));
+				mats[num * i + j] = matrix.subMatrix(j * rowsize,
+						(j + 1) * rowsize-1, i * colsize, (i + 1) * colsize-1);
 			}
 		}
+		System.out.println("Split over in: "
+				+ (System.currentTimeMillis() - time));
 		return mats;
 	}
 }

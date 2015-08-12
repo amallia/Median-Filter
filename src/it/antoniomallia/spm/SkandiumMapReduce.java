@@ -1,5 +1,8 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Stats;
+
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -7,7 +10,7 @@ import cl.niclabs.skandium.Skandium;
 import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.Map;
 
-public class MapReduce {
+public class SkandiumMapReduce {
 
 	/** Stream di input del framework */
 	private Stream<Matrix, Matrix> stream;
@@ -23,7 +26,7 @@ public class MapReduce {
 	 * @param threads
 	 *            Numero di threads con cui far eseguire il calcolo parallelo
 	 */
-	public MapReduce(int threads) {
+	public SkandiumMapReduce(int threads) {
 
 		this.threads = threads;
 		skandium = new Skandium(threads);
@@ -90,21 +93,21 @@ public class MapReduce {
 	 *            Percentuale di soglia delle matrici
 	 */
 	@SuppressWarnings("unchecked")
-	public void testcompute(int streamsize, int sizeRow, int sizeCol)
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws InterruptedException, ExecutionException {
 
 		System.out.println("#############################");
 		System.out.println("MapReduce - Threads: " + threads + " Streamsize: "
 				+ streamsize + " Matrixsize: " + sizeRow + " x " + sizeCol);
-
+		
 		Matrix[] initmat = new Matrix[streamsize];
 		for (int i = 0; i < streamsize; i++) {
 			initmat[i] = new Matrix(sizeRow, sizeCol);
 		}
+		Future<Matrix>[] results = new Future[streamsize];
 
 		long time = System.currentTimeMillis();
 
-		Future<Matrix>[] results = new Future[streamsize];
 		for (int i = 0; i < streamsize; i++) {
 			results[i] = (stream.input(initmat[i]));
 		}
@@ -115,6 +118,8 @@ public class MapReduce {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
+		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+		//Stats.getInstance().completion.add(new Experiment(threads, streamsize, sizeRow,(System.currentTimeMillis() - time) ));
 	}
 
 }

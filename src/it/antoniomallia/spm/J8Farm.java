@@ -1,5 +1,7 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
@@ -15,12 +17,13 @@ public class J8Farm {
 	}
 
 	public Matrix[] compute(Matrix[] input) {
-		
-		return  Arrays.stream(input).parallel()
-				.map(m -> new ExecuteFilter2().execute(m)).toArray(size -> new Matrix[size]);
+
+		return Arrays.stream(input).parallel()
+				.map(m -> new ExecuteFilter2().execute(m))
+				.toArray(size -> new Matrix[size]);
 	}
 
-	public void testcompute(int streamsize, int sizeRow, int sizeCol)
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws InterruptedException, ExecutionException {
 
 		System.out.println("#############################");
@@ -39,5 +42,8 @@ public class J8Farm {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
+		return new Experiment(threads, sizeRow,
+				(System.currentTimeMillis() - time));
+
 	}
 }
