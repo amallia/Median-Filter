@@ -1,6 +1,7 @@
 package it.antoniomallia.spm;
 
 import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Experiment.Type;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -29,7 +30,7 @@ public class SkandiumFarm {
 		// l'Histogram thresholding di ogni matrice
 
 		Farm<Matrix, Matrix> root = new Farm<Matrix, Matrix>(
-				new ExecuteFilter());
+				new SkandiumExecuteFilter());
 		stream = skandium.newStream(root);
 	}
 
@@ -59,7 +60,6 @@ public class SkandiumFarm {
 		
 		long time = System.currentTimeMillis();
 
-		// @SuppressWarnings("unchecked")
 		ArrayList<Future<Matrix>> results = new ArrayList<Future<Matrix>>(
 				streamsize);
 		for (int i = 0; i < streamsize; i++) {
@@ -72,7 +72,7 @@ public class SkandiumFarm {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
-		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+		return new Experiment(Type.SKANDIUM_FARM,streamsize,threads, sizeRow,(System.currentTimeMillis() - time));
 
 	}
 

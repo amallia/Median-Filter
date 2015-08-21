@@ -1,6 +1,7 @@
 package it.antoniomallia.spm;
 
 import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Experiment.Type;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
@@ -19,7 +20,7 @@ public class J8Farm {
 	public Matrix[] compute(Matrix[] input) {
 
 		return Arrays.stream(input).parallel()
-				.map(m -> new ExecuteFilter2().execute(m))
+				.map(m -> ExecuteFilter.execute(m))
 				.toArray(size -> new Matrix[size]);
 	}
 
@@ -42,7 +43,7 @@ public class J8Farm {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
-		return new Experiment(threads, sizeRow,
+		return new Experiment(Type.J8_FARM, streamsize, threads, sizeRow,
 				(System.currentTimeMillis() - time));
 
 	}

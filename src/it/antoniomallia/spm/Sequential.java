@@ -1,7 +1,9 @@
 package it.antoniomallia.spm;
 
+import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Experiment.Type;
+
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class Sequential {
 	
@@ -11,7 +13,7 @@ public class Sequential {
 		return m;
 	}
 	
-	public static void testcompute(int streamsize, int sizeRow, int sizeCol)
+	public static Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws InterruptedException, ExecutionException {
 
 		System.out.println("#############################");
@@ -32,6 +34,8 @@ public class Sequential {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
+		return new Experiment(Type.SEQUENTIAL,streamsize,0, sizeRow,(System.currentTimeMillis() - time));
+
 	}
 
 }

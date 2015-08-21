@@ -1,10 +1,10 @@
 package it.antoniomallia.spm;
 
 import it.antoniomallia.spm.stats.Experiment;
+import it.antoniomallia.spm.stats.Experiment.Type;
 
 import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class J8MapReduce {
 
@@ -17,8 +17,8 @@ public class J8MapReduce {
 	}
 
 	public Matrix compute(Matrix input) {
-		return Arrays.stream(new SplitMatrix2(threads).split(input)).parallel()
-				.map(n -> new ExecuteFilter2().execute(n))
+		return Arrays.stream(new SplitMatrix(threads).split(input)).parallel()
+				.map(n -> new ExecuteFilter().execute(n))
 				.reduce(new Matrix(input.getHeight(), input.getWidth()), (a, b) -> a.add(b));
 	}
 	
@@ -44,7 +44,7 @@ public class J8MapReduce {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
-		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+		return new Experiment(Type.J8_MAPREDUCE,streamsize,threads, sizeRow,(System.currentTimeMillis() - time));
 
 	}
 }

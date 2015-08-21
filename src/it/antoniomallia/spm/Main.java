@@ -1,17 +1,9 @@
 package it.antoniomallia.spm;
 
-import it.antoniomallia.spm.stats.Experiment;
-import it.antoniomallia.spm.stats.Stats;
-
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.concurrent.Future;
 
 import javax.imageio.ImageIO;
-
-import nu.pattern.OpenCV;
-
-import org.opencv.core.Core;
 
 public class Main {
 
@@ -60,8 +52,8 @@ public class Main {
 	// }// end salt
 
 	public static void main(String[] args) throws Exception {
-		OpenCV.loadShared();
-		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//		OpenCV.loadShared();
+//		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		//
 //		 Mat image =
 //		 Highgui.imread(Main.class.getResource("/output.png").getPath());

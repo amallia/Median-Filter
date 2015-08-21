@@ -1,7 +1,7 @@
 package it.antoniomallia.spm;
 
 import it.antoniomallia.spm.stats.Experiment;
-import it.antoniomallia.spm.stats.Stats;
+import it.antoniomallia.spm.stats.Experiment.Type;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -32,7 +32,7 @@ public class SkandiumMapReduce {
 		skandium = new Skandium(threads);
 
 		Map<Matrix, Matrix> mapReduce = new Map<Matrix, Matrix>(
-				new SplitMatrix(threads), new ExecuteFilter(), new MergeMatrix(
+				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(), new MergeMatrix(
 						threads));
 
 		// Genero il modello, formato da un pipeline a due stati, con due map
@@ -118,7 +118,7 @@ public class SkandiumMapReduce {
 
 		System.out.println("Computation over in: "
 				+ (System.currentTimeMillis() - time));
-		return new Experiment(threads, sizeRow,(System.currentTimeMillis() - time));
+		return new Experiment(Type.SKANDIUM_MAPEDUCE,streamsize,threads, sizeRow,(System.currentTimeMillis() - time));
 		//Stats.getInstance().completion.add(new Experiment(threads, streamsize, sizeRow,(System.currentTimeMillis() - time) ));
 	}
 
