@@ -1,8 +1,5 @@
 package it.antoniomallia.spm;
 
-import it.antoniomallia.spm.stats.Experiment;
-import it.antoniomallia.spm.stats.Experiment.Type;
-
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -17,8 +14,8 @@ public class SkandiumMapReduce {
 
 	/** Oggetto skandium del framework */
 	private Skandium skandium;
+
 	/** Numero di threads con cui e' stato instanziato il framework */
-	private int threads;
 
 	/**
 	 * Costruttore principale
@@ -27,25 +24,10 @@ public class SkandiumMapReduce {
 	 *            Numero di threads con cui far eseguire il calcolo parallelo
 	 */
 	public SkandiumMapReduce(int threads) {
-
-		this.threads = threads;
 		skandium = new Skandium(threads);
-
 		Map<Matrix, Matrix> mapReduce = new Map<Matrix, Matrix>(
-				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(), new MergeMatrix(
-						threads));
-
-		// Genero il modello, formato da un pipeline a due stati, con due map
-		// Map<Matrix, Matrix> mapHisto = new Map<Matrix, Matrix>(new
-		// SplitMatrix(
-		// worker), new ComputeHistogram(), new MergeHistoMatrix());
-		//
-		// Map<Matrix, Matrix> mapThre = new Map<Matrix, Matrix>(new
-		// SplitMatrix(
-		// worker), new ComputeThreshold(), new MergeMatrix());
-
-		// Pipe<Matrix, Matrix> root = new Pipe<Matrix, Matrix>(mapHisto,
-		// mapThre);
+				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(),
+				new MergeMatrix(threads));
 		stream = skandium.newStream(mapReduce);
 
 	}
@@ -77,49 +59,6 @@ public class SkandiumMapReduce {
 	 */
 	public void shutdown() {
 		skandium.shutdown();
-	}
-
-	/**
-	 * Esegue una computazione di test su uno stream di matrici che vengono
-	 * generate casualmente a runtime
-	 * 
-	 * @param streamsize
-	 *            Dimensione dello stream di matrici
-	 * @param sizeRow
-	 *            Numero di righe delle matrici
-	 * @param sizeCol
-	 *            Numero di colonne delle matrici
-	 * @param perc
-	 *            Percentuale di soglia delle matrici
-	 */
-	@SuppressWarnings("unchecked")
-	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
-			throws InterruptedException, ExecutionException {
-
-		System.out.println("#############################");
-		System.out.println("MapReduce - Threads: " + threads + " Streamsize: "
-				+ streamsize + " Matrixsize: " + sizeRow + " x " + sizeCol);
-		
-		Matrix[] initmat = new Matrix[streamsize];
-		for (int i = 0; i < streamsize; i++) {
-			initmat[i] = new Matrix(sizeRow, sizeCol);
-		}
-		Future<Matrix>[] results = new Future[streamsize];
-
-		long time = System.currentTimeMillis();
-
-		for (int i = 0; i < streamsize; i++) {
-			results[i] = (stream.input(initmat[i]));
-		}
-
-		for (int i = 0; i < streamsize; i++) {
-			results[i].get();
-		}
-
-		System.out.println("Computation over in: "
-				+ (System.currentTimeMillis() - time));
-		return new Experiment(Type.SKANDIUM_MAPEDUCE,streamsize,threads, sizeRow,(System.currentTimeMillis() - time));
-		//Stats.getInstance().completion.add(new Experiment(threads, streamsize, sizeRow,(System.currentTimeMillis() - time) ));
 	}
 
 }

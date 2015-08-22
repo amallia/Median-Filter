@@ -1,9 +1,5 @@
 package it.antoniomallia.spm;
 
-import it.antoniomallia.spm.stats.Experiment;
-import it.antoniomallia.spm.stats.Experiment.Type;
-
-import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
@@ -19,19 +15,16 @@ public class SkandiumFarm {
 	private Skandium skandium;
 
 	/** Numero di threads con cui e' stato instanziato il framework */
-	private int threads;
 
 	public SkandiumFarm(int threads) {
-
-		this.threads = threads;
 		skandium = new Skandium(threads);
-
-		// Genero il modello, formato da un farm dove viene calcolato
-		// l'Histogram thresholding di ogni matrice
-
 		Farm<Matrix, Matrix> root = new Farm<Matrix, Matrix>(
 				new SkandiumExecuteFilter());
 		stream = skandium.newStream(root);
+	}
+
+	public Stream<Matrix, Matrix> getStream() {
+		return stream;
 	}
 
 	public Matrix compute(Matrix m) throws InterruptedException,
@@ -42,38 +35,6 @@ public class SkandiumFarm {
 
 	public void shutdown() {
 		skandium.shutdown();
-	}
-
-	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
-			throws InterruptedException, ExecutionException {
-
-
-		System.out.println("#############################");
-		System.out.println("Parallel Farm Computation - Threads: " + threads
-				+ " Streamsize: " + streamsize + " Matrixsize: " + sizeRow
-				+ " x " + sizeCol);
-
-		ArrayList<Matrix> initmat = new ArrayList<Matrix>(streamsize);
-		for (int i = 0; i < streamsize; i++) {
-			initmat.add(i, new Matrix(sizeRow, sizeCol));
-		}
-		
-		long time = System.currentTimeMillis();
-
-		ArrayList<Future<Matrix>> results = new ArrayList<Future<Matrix>>(
-				streamsize);
-		for (int i = 0; i < streamsize; i++) {
-			results.add(i, (stream.input(initmat.get(i))));
-		}
-
-		for (Future<Matrix> fut : results) {
-			fut.get();
-		}
-
-		System.out.println("Computation over in: "
-				+ (System.currentTimeMillis() - time));
-		return new Experiment(Type.SKANDIUM_FARM,streamsize,threads, sizeRow,(System.currentTimeMillis() - time));
-
 	}
 
 }

@@ -1,4 +1,4 @@
-package it.antoniomallia.spm;
+package it.antoniomallia.spm.test;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -112,16 +112,16 @@ public class Main {
 //		File output = new File("pippo.png");
 //		ImageIO.write(m.toImage(), "jpg", output);	
 //		
-		SkandiumMapReduce map = new SkandiumMapReduce(4);
-		map.testcompute(1, 4000, 4000);
-		map.testcompute(1, 4000, 4000);
-		map.shutdown();
-		
-		map = new SkandiumMapReduce(2);
-		map.testcompute(2, 200, 200);
-		map.testcompute(2, 200, 200);
-		map.shutdown();
-		
+//		SkandiumMapReduce map = new SkandiumMapReduce(4);
+//		map.testcompute(1, 4000, 4000);
+//		map.testcompute(1, 4000, 4000);
+//		map.shutdown();
+//		
+//		map = new SkandiumMapReduce(2);
+//		map.testcompute(2, 200, 200);
+//		map.testcompute(2, 200, 200);
+//		map.shutdown();
+//		
 
 //		
 //		J8MapReduce mapj= new J8MapReduce(4);
