@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+Project MedianFilter SPM_2015
+Author: Antonio Mallia (423458)
+-->
+
+<project name="MedianFilter" default="all" basedir=".">
+
+	<!-- Propery set-->
+	<property name="target" value="1.8" />
+	<property name="source" value="1.8" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="main-class" value="it.antoniomallia.spm.test.TestExec" />
+
+	<!-- Compile Classpath -->
+	<path id="compile.classpath">
+		<fileset dir="lib">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- Clean project-->
+	<target name="clean" description="Delete bin folder">
+		<delete dir="bin" />
+	</target>
+
+	<!-- Init Project-->
+	<target name="prep" description="Preparation">
+		<mkdir dir="bin" />
+	</target>
+
+	<!-- Build Project with javac 1.8-->
+	<target name="build" depends="prep">
+		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="compile.classpath" />
+		</javac>
+	</target>
+
+	<!-- Pack the project in a Jar-->
+	<target name="jar">
+		<jar destfile="${ant.project.name}.jar">
+			<fileset dir="bin" />
+			<zipgroupfileset dir="lib" />
+			<manifest>
+				<attribute name="Main-Class" value="${main-class}" />
+			</manifest>
+		</jar>
+	</target>
+
+	<!-- Clean, Build and Pack-->
+	<target name="all" description="Clean, Build, Jar" depends="clean, build, jar">
+	</target>
+
+</project>

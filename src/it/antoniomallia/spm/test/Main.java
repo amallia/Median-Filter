@@ -2,20 +2,11 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.J8MapReduce;
 import it.antoniomallia.spm.Matrix;
-import it.antoniomallia.spm.SplitMatrix;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
 
 public class Main {
 

@@ -150,8 +150,8 @@ public class Matrix {
 						|| (j + rowStart - 1) < 0
 						|| (j + rowStart - 1) > (matrix[0].length - 1)) {
 					if ((i + colStart - 1) > (matrix.length - 1)) {
-						System.out.println((i + colStart - 1) + " "
-								+ (i + colStart - 2));
+//						System.out.println((i + colStart - 1) + " "
+//								+ (i + colStart - 2));
 					}
 					int colV = (i + colStart - 1) < 0 ? (i + colStart) : (i
 							+ colStart - 1) > (matrix.length - 1) ? (i
