@@ -138,36 +138,35 @@ public class Matrix {
 		int colSize = colEnd - colStart + 1;
 		// Allocate the submatrix, bigger since we need the edge just for
 		// computing median filter
-		Matrix subMatrix = new Matrix(colSize + 2, colSize + 2);
+		Matrix subMatrix = new Matrix(rowSize + 2, colSize + 2);
 		subMatrix.rowStart = rowStart;
 		subMatrix.rowEnd = rowEnd;
 		subMatrix.colStart = colStart;
 		subMatrix.colEnd = colEnd;
-		// for each pixel of the extended submatrix
-		if (rowStart == 0) {
-			for (int i = 1; i < rowSize + 1; i++) {
-				subMatrix.matrix[i][0] = matrix[i - 1][0];
-			}
-		}
-		if (rowEnd == matrix[0].length - 1) {
-			for (int i = 1; i < rowSize + 1; i++) {
-				subMatrix.matrix[i][subMatrix.matrix[0].length - 1] = matrix[i - 1][matrix[0].length - 1];
-			}
-		}
-		if (colStart == 0) {
-			for (int i = 1; i < colSize + 1; i++) {
-				subMatrix.matrix[0][i] = matrix[0][i - 1];
-			}
-		}
-		if (colEnd == matrix.length - 1) {
-			for (int i = 1; i < colSize + 1; i++) {
-				subMatrix.matrix[subMatrix.matrix.length - 1][i] = matrix[matrix.length - 1][i - 1];
-			}
-		}
-		for (int i = 1; i < colSize + 1; i++) {
-			for (int j = 1; j < rowSize + 1; j++) {
-				subMatrix.matrix[i][j] = matrix[i + colStart - 1][j + rowStart
-						- 1];
+		for (int i = 0; i < colSize + 2; i++) {
+			for (int j = 0; j < rowSize + 2; j++) {
+				if ((i + colStart - 1) < 0
+						|| (i + colStart - 1) > (matrix.length - 1)
+						|| (j + rowStart - 1) < 0
+						|| (j + rowStart - 1) > (matrix[0].length - 1)) {
+					if ((i + colStart - 1) > (matrix.length - 1)) {
+						System.out.println((i + colStart - 1) + " "
+								+ (i + colStart - 2));
+					}
+					int colV = (i + colStart - 1) < 0 ? (i + colStart) : (i
+							+ colStart - 1) > (matrix.length - 1) ? (i
+							+ colStart - 2) : i + colStart - 1;
+					int rowV = (j + rowStart - 1) < 0 ? (j + rowStart) : (j
+							+ rowStart - 1) > (matrix[0].length - 1) ? (j
+							+ rowStart - 2) : j + rowStart - 1;
+					subMatrix.matrix[i][j] = matrix[colV][rowV];
+
+				} else {
+
+					subMatrix.matrix[i][j] = matrix[i + colStart - 1][j
+							+ rowStart - 1];
+
+				}
 			}
 
 		}
@@ -175,15 +174,15 @@ public class Matrix {
 	}
 
 	public Matrix add(Matrix b) {
-//long time = System.currentTimeMillis();
+		// long time = System.currentTimeMillis();
 		for (int i = b.colStart; i < b.colEnd + 1; i++) {
 			for (int j = b.rowStart; j < b.rowEnd + 1; j++) {
 				this.matrix[i][j] = b.matrix[i % (b.matrix.length - 2) + 1][j
 						% (b.matrix[0].length - 2) + 1];
 			}
 		}
-//		System.out.println("Reduced over in: "
-//				+ (System.currentTimeMillis() - time));
+		// System.out.println("Reduced over in: "
+		// + (System.currentTimeMillis() - time));
 		return this;
 	}
 }

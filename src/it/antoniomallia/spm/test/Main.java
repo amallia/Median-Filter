@@ -1,16 +1,26 @@
 package it.antoniomallia.spm.test;
 
-import it.antoniomallia.spm.SkandiumMapReduce;
+import it.antoniomallia.spm.J8MapReduce;
+import it.antoniomallia.spm.Matrix;
+import it.antoniomallia.spm.SplitMatrix;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
 
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
+
 public class Main {
 
-	
-	
+	private static final String headerMsg = " __  __          _ _             _____ _ _ _\r\n|  \\/  | ___  __| (_) __ _ _ __ |  ___(_) | |_ ___ _ __\r\n| |\\/| |/ _ \\/ _` | |/ _` | '_ \\| |_  | | | __/ _ \\ '__|\r\n| |  | |  __/ (_| | | (_| | | | |  _| | | | ||  __/ |\r\n|_|  |_|\\___|\\__,_|_|\\__,_|_| |_|_|   |_|_|\\__\\___|_| ";
+
 	//
 	// public static int randInt(int min, int max) {
 	//
@@ -54,22 +64,40 @@ public class Main {
 	// }// end salt
 
 	public static void main(String[] args) throws Exception {
-//		OpenCV.loadShared();
-//		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//		int[][] a = new int[4][4];
+//		for (int i = 0; i < 4; i++)
+//			for (int j = 0; j < 4; j++) {
+//				a[i][j] = Integer.valueOf(String.valueOf(i) + String.valueOf(j));
+//			}
+//		Matrix[] mats = new SplitMatrix(2).split(new Matrix(a));
+//		for (Matrix m : mats) {
+//			for (int i = 0; i < m.matrix.length; i++) {
+//				for (int j = 0; j < m.matrix[0].length; j++) {
+//					System.out.print(m.matrix[i][j] + ",");
+//				}
+//				System.out.println();
+//			}
+//			System.out.println("-------------------------------");
+//
+//		}
+//		System.exit(0);
+
+		// OpenCV.loadShared();
+		// System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		//
-//		 Mat image =
-//		 Highgui.imread(Main.class.getResource("/output.png").getPath());
+		// Mat image =
+		// Highgui.imread(Main.class.getResource("/output.png").getPath());
 		// long start =System.currentTimeMillis();
 		//
-//		 Imgproc.medianBlur(image, image, 9);
+		// Imgproc.medianBlur(image, image, 9);
 		// System.out.println(System.currentTimeMillis()-start+"ms");
 		//
 		//
 		//
 		// // Save the visualized detection.
-//		 String filename = "faceDetection.png";
+		// String filename = "faceDetection.png";
 		// System.out.println(String.format("Writing %s", filename));
-//		 Highgui.imwrite(filename, image);
+		// Highgui.imwrite(filename, image);
 
 		/*
 		 * Logic: Captures the colour of 8 pixels around the target
@@ -84,7 +112,7 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		File f = new File(Main.class.getResource("/output.png").getPath());
+		File f = new File(Main.class.getResource("/105053.png").getPath());
 
 		BufferedImage img = ImageIO.read(f);
 		int[][] arr = new int[img.getWidth()][img.getHeight()];
@@ -93,38 +121,40 @@ public class Main {
 				arr[i][j] = img.getRGB(i, j);
 
 			}
-//		List<int[][]> array = new ArrayList<int[][]>();
-//		 array.add(arr);
-//		long start = System.currentTimeMillis();
-//		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", "8");
-//	Matrix m = Arrays.stream(new SplitMatrix2(8).split(new Matrix(arr))).parallel().map(n-> new ExecuteFilter2().execute(n)).sequential().reduce(new Matrix(8), (a, b)->a.add(b));
-//		
+		// List<int[][]> array = new ArrayList<int[][]>();
+		// array.add(arr);
+		// long start = System.currentTimeMillis();
+		// System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism",
+		// "8");
+		// Matrix m = Arrays.stream(new SplitMatrix2(8).split(new
+		// Matrix(arr))).parallel().map(n-> new
+		// ExecuteFilter2().execute(n)).sequential().reduce(new Matrix(8), (a,
+		// b)->a.add(b));
+		//
 		// .collect(Collectors.toList()).size());
-//		System.out.println(System.currentTimeMillis() - start + "ms");
-//
-//		MapReduce mapReduce = new MapReduce(1);
-//		long start = System.currentTimeMillis();
-//	    Matrix m = mapReduce.compute(new Matrix(arr));
-//		System.out.println(System.currentTimeMillis() - start + "ms");
+		// System.out.println(System.currentTimeMillis() - start + "ms");
+		//
+		J8MapReduce mapReduce = new J8MapReduce(8);
+		// long start = System.currentTimeMillis();
+		Matrix m = mapReduce.compute(new Matrix(arr));
+		// System.out.println(System.currentTimeMillis() - start + "ms");
 
-//		start = System.currentTimeMillis();
-//		m = Sequential.compute(new Matrix(arr));
-//		System.out.println(System.currentTimeMillis() - start + "ms");
+		// start = System.currentTimeMillis();
+		// m = Sequential.compute(new Matrix(arr));
+		// System.out.println(System.currentTimeMillis() - start + "ms");
 
-//		File output = new File("pippo.png");
-//		ImageIO.write(m.toImage(), "jpg", output);	
-//		
-		SkandiumMapTest map = new SkandiumMapTest(4);
-		map.testcompute(1, 4000, 4000);
-		map.testcompute(1, 4000, 4000);
-		map.shutdown();
-		
+		File output = new File("pipposss.png");
+		ImageIO.write(m.toImage(), "jpg", output);
+		//
+		// SkandiumMapTest map = new SkandiumMapTest(4);
+		// map.testcompute(1, 4000, 4000);
+		// map.testcompute(1, 4000, 4000);
+		// map.shutdown();
 
-
-//		
-		J8MapTest mapj= new J8MapTest(4);
-		mapj.testcompute(1, 4000, 4000);
-		mapj.testcompute(1, 4000, 4000);
+		//
+		// J8MapTest mapj= new J8MapTest(4);
+		// mapj.testcompute(1, 4000, 4000);
+		// mapj.testcompute(1, 4000, 4000);
 		System.exit(0);
 
 	}
