@@ -3,12 +3,14 @@ package it.antoniomallia.spm;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import lombok.Getter;
 import cl.niclabs.skandium.Skandium;
 import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.Map;
 
 public class SkandiumMapReduce {
 
+	@Getter
 	/** Stream di input del framework */
 	private Stream<Matrix, Matrix> stream;
 
@@ -27,18 +29,11 @@ public class SkandiumMapReduce {
 		skandium = new Skandium(threads);
 		Map<Matrix, Matrix> mapReduce = new Map<Matrix, Matrix>(
 				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(),
-				new MergeMatrix(threads));
+				new SkandiumMergeMatrix(threads));
 		stream = skandium.newStream(mapReduce);
 
 	}
 
-	public Stream<Matrix, Matrix> getStream() {
-		return stream;
-	}
-
-	public void setStream(Stream<Matrix, Matrix> stream) {
-		this.stream = stream;
-	}
 
 	/**
 	 * Calcola l'Histogram thresholding di una matrice utilizzando il framework

@@ -41,11 +41,9 @@ public class Matrix {
 
 	public Matrix(int w) {
 		num = w;
-		// TODO Auto-generated constructor stub
 	}
 
 	public Matrix(int sizeRow, int sizeCol) {
-
 		int[][] rmat = new int[sizeRow][sizeCol];
 		for (int i = 0; i < sizeRow; i++) {
 			for (int j = 0; j < sizeCol; j++) {
@@ -174,18 +172,6 @@ public class Matrix {
 
 		}
 		return subMatrix;
-	}
-
-	@Override
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < matrix.length; i++) {
-			for (int j = 0; j < matrix[0].length; j++) {
-				sb.append(matrix[i][j]);
-			}
-			sb.append('\n');
-		}
-		return sb.toString();
 	}
 
 	public Matrix add(Matrix b) {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class J8MapReduce {
 
-	int threads;
+	private int threads;
 
 	public J8MapReduce(int num) {
 		threads = num;
@@ -15,12 +15,12 @@ public class J8MapReduce {
 	}
 
 	public Matrix compute(Matrix input) {
-		return Arrays
-				.stream(new SplitMatrix(threads).split(input))
-				.parallel()
+		return new MergeMatrix(threads).merge(Arrays
+				.stream(new SplitMatrix(threads).split(input)).parallel()
 				.map(n -> ExecuteFilter.execute(n))
-				.reduce(new Matrix(input.getHeight(), input.getWidth()),
-						(a, b) -> a.add(b));
+				.toArray(size -> new Matrix[size]));
+		// .reduce(new Matrix(input.getHeight(), input.getWidth()),
+		// (a, b) -> a.add(b));
 	}
 
 }
