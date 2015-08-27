@@ -5,42 +5,53 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.Random;
 
+import lombok.Getter;
+
+
 /**
- * @author antoniomallia
- *
- */
-/**
- * @author antoniomallia
- *
- */
-/**
- * @author antoniomallia
- *
- */
-/**
+ * Matrix Class used to wrap the image and containing useful methods
  * @author antoniomallia
  *
  */
 public class Matrix {
 
-	public int[][] matrix;
-
+	@Getter
+	private int[][] matrix;
+	
+	/**
+	 * @return matrix height
+	 */
 	public int getHeight() {
 		return matrix.length;
 	}
-
+	/**
+	 * @return matrix width
+	 */
 	public int getWidth() {
 		return matrix[0].length;
 	}
 
+	/**
+	 * Constructor from an array of RGB integers
+	 * @param matrix array of int
+	 */
 	public Matrix(int[][] matrix) {
 		this.matrix = matrix;
 	}
 
+	/** 
+	 * Constructor of an blank matrix
+	 * @param sizeRow width
+	 * @param sizeCol height
+	 */
 	public Matrix(int sizeRow, int sizeCol) {
 		matrix = new int[sizeRow][sizeCol];
 	}
 
+	
+	/** Fill the matrix with random values
+	 * @return the matrix generated
+	 */
 	public Matrix randomValues(){
 		Random rand = new Random();
 		for (int i = 0; i < getHeight(); i++) {

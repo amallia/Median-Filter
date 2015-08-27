@@ -12,7 +12,6 @@ public class Stats {
 		}
 		return instance;
 	}
-
 	public List<Experiment> tests = new ArrayList<Experiment>();
 
 	

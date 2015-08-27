@@ -11,7 +11,7 @@ public class SkandiumMergeMatrix implements Merge<Matrix, Matrix> {
 	}
 
 	@Override
-	public Matrix merge(Matrix[] m) throws Exception {
+	public Matrix merge(Matrix[] m)  {
 		return new MergeMatrix(num).merge(m);
 	}
 }

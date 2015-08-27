@@ -11,7 +11,7 @@ public class SkandiumSplitMatrix implements Split<Matrix, Matrix> {
 	}
 
 	@Override
-	public Matrix[] split(Matrix matrix) throws Exception {
+	public Matrix[] split(Matrix matrix) {
 		return new SplitMatrix(num).split(matrix);
 	}
 }

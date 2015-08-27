@@ -6,7 +6,7 @@ public class SkandiumExecuteFilter implements Execute<Matrix, Matrix> {
 
 	@Override
 	public Matrix execute(Matrix matrix) throws Exception {
-		return ExecuteFilter.execute(matrix);
+		return new ExecuteFilter().execute(matrix);
 	}
 
 }

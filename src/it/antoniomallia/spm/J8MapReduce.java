@@ -11,25 +11,16 @@ public class J8MapReduce {
 	public J8MapReduce(int num) {
 
 		fjPool = new ForkJoinPool(num);
-
 		threads = num;
 
 	}
 
-	public Matrix compute(Matrix input) {
-		try {
+	public Matrix compute(Matrix input) throws InterruptedException, ExecutionException {
 			return fjPool.submit(
 					() -> new MergeMatrix(threads).merge(Arrays
 							.stream(new SplitMatrix(threads).split(input))
-							.parallel().map(n -> ExecuteFilter.execute(n))
+							.parallel().map(n -> new ExecuteFilter().execute(n))
 							.toArray(size -> new Matrix[size]))).get();
-		} catch (InterruptedException | ExecutionException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-		// .reduce(new Matrix(input.getHeight(), input.getWidth()),
-		// (a, b) -> a.add(b));
 	}
 
 }

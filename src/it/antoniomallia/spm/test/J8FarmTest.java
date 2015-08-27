@@ -2,13 +2,15 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.J8Farm;
 import it.antoniomallia.spm.Matrix;
-import it.antoniomallia.spm.stats.Experiment.Type;
+import it.antoniomallia.spm.stats.Experiment.ExperimentType;
+
+import java.util.concurrent.ExecutionException;
 
 public class J8FarmTest extends Test {
 	private J8Farm j8Farm;
 
 	public J8FarmTest(int threads) {
-		super(Type.J8_FARM, threads);
+		super(ExperimentType.J8_FARM, threads);
 		j8Farm = new J8Farm(threads);
 	}
 
@@ -18,7 +20,7 @@ public class J8FarmTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] mats) throws Exception {
+	public Matrix[] compute(Matrix[] mats) throws InterruptedException, ExecutionException {
 		return j8Farm.compute(mats);
 
 	}

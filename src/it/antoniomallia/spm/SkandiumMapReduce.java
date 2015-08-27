@@ -36,17 +36,15 @@ public class SkandiumMapReduce {
 
 
 	/**
-	 * Calcola l'Histogram thresholding di una matrice utilizzando il framework
-	 * parallelo istanziato
 	 * 
 	 * @param m
-	 *            Matrice da calcolare
-	 * @return Matrice calcolata
+	 * @return 
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
-	public Matrix compute(Matrix m) throws InterruptedException,
-			ExecutionException {
+	public Matrix compute(Matrix m) throws InterruptedException, ExecutionException {
 		Future<Matrix> result = stream.input(m);
-		return result.get();
+			return result.get();
 	}
 
 	/**

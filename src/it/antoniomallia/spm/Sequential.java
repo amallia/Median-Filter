@@ -1,8 +1,11 @@
 package it.antoniomallia.spm;
 
+
 public class Sequential {
+	
+	
 	public static Matrix compute(Matrix m) {
-		return ExecuteFilter.execute(m);
+		return new ExecuteFilter().execute(m);
 	}
 
 }

@@ -2,7 +2,7 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.stats.Experiment;
-import it.antoniomallia.spm.stats.Experiment.Type;
+import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -10,10 +10,10 @@ public abstract class Test {
 
 	private static final String testExecMsg = "Executing Test ==> Type: %s\t Thread number: %s\t Matrices number: %s\t Matrix size: %s x %s";
 	private static final String timeSpentMsg = "Execution time: %s ms";
-	private Type type;
+	private ExperimentType type;
 	private int threads;
 
-	public Test(Type type, int threads) {
+	public Test(ExperimentType type, int threads) {
 		this.type = type;
 		this.threads = threads;
 	}
@@ -40,9 +40,10 @@ public abstract class Test {
 	 *            Numero di righe delle matrici
 	 * @param sizeCol
 	 *            Numero di colonne delle matrici
+	 *            
+	 * @return Execution stats
 	 */
-	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
-			throws Exception {
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol) throws Exception{
 
 		log.info(String.format(testExecMsg, type.getTitle(), threads,
 				streamsize, sizeRow, sizeCol));
@@ -50,7 +51,7 @@ public abstract class Test {
 
 		long time = System.currentTimeMillis();
 
-		Matrix[] results = compute(initmat);
+		compute(initmat);
 
 		long computationTime = System.currentTimeMillis() - time;
 		log.info(String.format(timeSpentMsg, computationTime));

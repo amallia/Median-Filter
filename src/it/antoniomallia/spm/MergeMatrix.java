@@ -1,7 +1,8 @@
 package it.antoniomallia.spm;
 
 
-public class MergeMatrix {
+
+public class MergeMatrix{
 
 	private int num;
 
@@ -18,7 +19,7 @@ public class MergeMatrix {
 				for (int k = 1; k < colsize + 1; k++) {
 					for (int l = 1; l < rowsize + 1; l++) {
 						res[i * (colsize) + k - 1][j * (rowsize) + l - 1] = m[num
-								* i + j].matrix[k][l];
+								* i + j].getMatrix()[k][l];
 					}
 				}
 			}

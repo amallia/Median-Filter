@@ -2,8 +2,9 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.SkandiumFarm;
-import it.antoniomallia.spm.stats.Experiment.Type;
+import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class SkandiumFarmTest extends Test {
@@ -11,7 +12,7 @@ public class SkandiumFarmTest extends Test {
 	private SkandiumFarm farm;
 
 	public SkandiumFarmTest(int threads) {
-		super(Type.SKANDIUM_FARM, threads);
+		super(ExperimentType.SKANDIUM_FARM, threads);
 		farm = new SkandiumFarm(threads);
 	}
 
@@ -21,8 +22,9 @@ public class SkandiumFarmTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] mats) throws Exception {
-        @SuppressWarnings("unchecked")
+	public Matrix[] compute(Matrix[] mats) throws InterruptedException,
+			ExecutionException {
+		@SuppressWarnings("unchecked")
 		Future<Matrix>[] futResults = new Future[mats.length];
 		Matrix[] results = new Matrix[mats.length];
 		for (int i = 0; i < mats.length; i++) {
