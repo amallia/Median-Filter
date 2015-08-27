@@ -25,7 +25,7 @@ public abstract class Test {
 	public Matrix[] init(int streamsize, int size) {
 		Matrix[] initmat = new Matrix[streamsize];
 		for (int i = 0; i < streamsize; i++) {
-			initmat[i] = new Matrix(size, size);
+			initmat[i] = new Matrix(size, size).randomValues();
 		}
 		return initmat;
 	}
@@ -40,8 +40,6 @@ public abstract class Test {
 	 *            Numero di righe delle matrici
 	 * @param sizeCol
 	 *            Numero di colonne delle matrici
-	 * @param perc
-	 *            Percentuale di soglia delle matrici
 	 */
 	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
 			throws Exception {

@@ -3,6 +3,7 @@ package it.antoniomallia.spm;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @author antoniomallia
@@ -23,40 +24,35 @@ import java.util.Arrays;
 public class Matrix {
 
 	public int[][] matrix;
-	int num;
-
-	int rowStart, rowEnd, colStart, colEnd;
 
 	public int getHeight() {
-		return matrix[0].length;
+		return matrix.length;
 	}
 
 	public int getWidth() {
-		return matrix.length;
+		return matrix[0].length;
 	}
 
 	public Matrix(int[][] matrix) {
 		this.matrix = matrix;
 	}
 
-	public Matrix(int w) {
-		num = w;
+	public Matrix(int sizeRow, int sizeCol) {
+		matrix = new int[sizeRow][sizeCol];
 	}
 
-	public Matrix(int sizeRow, int sizeCol) {
-		int[][] rmat = new int[sizeRow][sizeCol];
-		for (int i = 0; i < sizeRow; i++) {
-			for (int j = 0; j < sizeCol; j++) {
-				rmat[i][j] = new Color((int) Math.random() * 255,
-						(int) Math.random() * 255, (int) Math.random() * 255)
+	public Matrix randomValues(){
+		Random rand = new Random();
+		for (int i = 0; i < getHeight(); i++) {
+			for (int j = 0; j < getWidth(); j++) {
+				matrix[i][j] = new Color(rand.nextFloat(),
+						rand.nextFloat(), rand.nextFloat())
 						.getRGB();
 			}
 		}
-
-		this.matrix = rmat;
-
+		return this;
 	}
-
+	
 	/**
 	 * This method applies the median filter algorithm to the current matrix
 	 */
@@ -139,50 +135,28 @@ public class Matrix {
 		// Allocate the submatrix, bigger since we need the edge just for
 		// computing median filter
 		Matrix subMatrix = new Matrix(rowSize + 2, colSize + 2);
-		subMatrix.rowStart = rowStart;
-		subMatrix.rowEnd = rowEnd;
-		subMatrix.colStart = colStart;
-		subMatrix.colEnd = colEnd;
 		for (int i = 0; i < colSize + 2; i++) {
 			for (int j = 0; j < rowSize + 2; j++) {
 				if ((i + colStart - 1) < 0
-						|| (i + colStart - 1) > (matrix.length - 1)
+						|| (i + colStart - 1) > (getHeight() - 1)
 						|| (j + rowStart - 1) < 0
-						|| (j + rowStart - 1) > (matrix[0].length - 1)) {
-					if ((i + colStart - 1) > (matrix.length - 1)) {
-//						System.out.println((i + colStart - 1) + " "
-//								+ (i + colStart - 2));
+						|| (j + rowStart - 1) > (getWidth() - 1)) {
+					if ((i + colStart - 1) > (getHeight() - 1)) {
 					}
-					int colV = (i + colStart - 1) < 0 ? (i + colStart) : (i
-							+ colStart - 1) > (matrix.length - 1) ? (i
-							+ colStart - 2) : i + colStart - 1;
-					int rowV = (j + rowStart - 1) < 0 ? (j + rowStart) : (j
-							+ rowStart - 1) > (matrix[0].length - 1) ? (j
-							+ rowStart - 2) : j + rowStart - 1;
+					int colV = (i + colStart - 1) < 0 ? (i + colStart)
+							: (i + colStart - 1) > (getHeight() - 1) ? (i
+									+ colStart - 2) : i + colStart - 1;
+					int rowV = (j + rowStart - 1) < 0 ? (j + rowStart)
+							: (j + rowStart - 1) > (getWidth() - 1) ? (j
+									+ rowStart - 2) : j + rowStart - 1;
 					subMatrix.matrix[i][j] = matrix[colV][rowV];
-
 				} else {
-
 					subMatrix.matrix[i][j] = matrix[i + colStart - 1][j
 							+ rowStart - 1];
-
 				}
 			}
 
 		}
 		return subMatrix;
-	}
-
-	public Matrix add(Matrix b) {
-		// long time = System.currentTimeMillis();
-		for (int i = b.colStart; i < b.colEnd + 1; i++) {
-			for (int j = b.rowStart; j < b.rowEnd + 1; j++) {
-				this.matrix[i][j] = b.matrix[i % (b.matrix.length - 2) + 1][j
-						% (b.matrix[0].length - 2) + 1];
-			}
-		}
-		// System.out.println("Reduced over in: "
-		// + (System.currentTimeMillis() - time));
-		return this;
 	}
 }

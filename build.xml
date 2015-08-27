@@ -52,4 +52,11 @@ Author: Antonio Mallia (423458)
 	<target name="all" description="Clean, Build, Jar" depends="clean, build, jar">
 	</target>
 
+	<!-- JavaDoc-->
+	<target name="javadoc">
+		<javadoc destdir="doc/" sourcepath="src"  author="true" use="true">
+			<classpath refid="compile.classpath" />
+		</javadoc>
+	</target>
+
 </project>
