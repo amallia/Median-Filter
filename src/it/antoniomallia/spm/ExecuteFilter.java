@@ -2,7 +2,7 @@ package it.antoniomallia.spm;
 
 
 /**
- * Class implementing an IExecutor
+ * Executor Class
  * @author antoniomallia
  *
  */

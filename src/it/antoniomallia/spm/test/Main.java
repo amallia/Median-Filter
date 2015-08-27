@@ -1,13 +1,10 @@
 package it.antoniomallia.spm.test;
 
-import it.antoniomallia.spm.ExecuteFilter;
-import it.antoniomallia.spm.J8Farm;
-import it.antoniomallia.spm.J8MapReduce;
 import it.antoniomallia.spm.Matrix;
+import it.antoniomallia.spm.SkandiumMap;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
@@ -76,22 +73,22 @@ public class Main {
 		// }
 		// System.exit(0);
 
-		// OpenCV.loadShared();
-		// System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//		OpenCV.loadShared();
+//		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
 		//
-		// Mat image =
-		// Highgui.imread(Main.class.getResource("/output.png").getPath());
+//		Mat image = Highgui.imread(Main.class.getResource("/balloons_noisy.png")
+//				.getPath());
 		// long start =System.currentTimeMillis();
 		//
-		// Imgproc.medianBlur(image, image, 9);
+//		 Imgproc.medianBlur(image, image, 1);
 		// System.out.println(System.currentTimeMillis()-start+"ms");
 		//
 		//
 		//
 		// // Save the visualized detection.
-		// String filename = "faceDetection.png";
-		// System.out.println(String.format("Writing %s", filename));
-		// Highgui.imwrite(filename, image);
+//		 String filename = "faceDetection.png";
+//		// System.out.println(String.format("Writing %s", filename));
+//		 Highgui.imwrite(filename, image);
 
 		/*
 		 * Logic: Captures the colour of 8 pixels around the target
@@ -106,19 +103,21 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		// File f = new File(Main.class.getResource("/pipposss.png").getPath());
+		File f = new File(Main.class.getResource("/balloons_noisy.png")
+				.getPath());
 
-		// BufferedImage img = ImageIO.read(f);
-		// int[][] arr = new int[img.getWidth()][img.getHeight()];
-		// for (int i = 0; i < img.getWidth(); i++)
-		// for (int j = 0; j < img.getHeight(); j++) {
-		// arr[i][j] = img.getRGB(i, j);
-		//
+		 BufferedImage img = ImageIO.read(f);
+		 int[][] arr = new int[img.getWidth()][img.getHeight()];
+		 for (int i = 0; i < img.getWidth(); i++)
+		 for (int j = 0; j < img.getHeight(); j++) {
+		 arr[i][j] = img.getRGB(i, j);
+		
+		 }
+
+		// Matrix[] arrM = new Matrix[4];
+		// for (int i = 0; i < arrM.length; i++) {
+		// arrM[i] = new Matrix(4000, 4000);
 		// }
-		Matrix[] arrM = new Matrix[4];
-		for (int i = 0; i < arrM.length; i++) {
-			arrM[i] = new Matrix(4000, 4000);
-		}
 
 		// List<int[][]> array = new ArrayList<int[][]>();
 		// array.add(arr);
@@ -133,12 +132,12 @@ public class Main {
 		// .collect(Collectors.toList()).size());
 		// System.out.println(System.currentTimeMillis() - start + "ms");
 		//
-		
-		J8Farm farm = new J8Farm(4);
-		arrM = farm.compute(arrM);
-		long start = System.currentTimeMillis();
-		arrM = farm.compute(arrM);
-		System.out.println(System.currentTimeMillis() - start + "ms");
+
+		// J8Farm farm = new J8Farm(4);
+		// arrM = farm.compute(arrM);
+		// long start = System.currentTimeMillis();
+		// arrM = farm.compute(arrM);
+		// System.out.println(System.currentTimeMillis() - start + "ms");
 		// System.out.println(Thread.activeCount());
 
 		// start = System.currentTimeMillis();
@@ -146,9 +145,12 @@ public class Main {
 		// System.out.println(System.currentTimeMillis() - start + "ms");
 		// Matrix m = new Matrix(10, 10).randomValues();
 
-		// File output = new File("pipposss.png");
-		// ImageIO.write(m.toImage(), "jpg", output);
-		//
+		SkandiumMap map = new SkandiumMap(4);
+		Matrix m = map.compute(new Matrix(arr));
+		
+		File output = new File("pipposss.png");
+		ImageIO.write(m.toImage(), "jpg", output);
+
 		// SkandiumMapTest map = new SkandiumMapTest(4);
 		// map.testcompute(1, 4000, 4000);
 		// map.testcompute(1, 4000, 4000);

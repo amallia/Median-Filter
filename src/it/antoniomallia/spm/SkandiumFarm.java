@@ -8,6 +8,11 @@ import cl.niclabs.skandium.Skandium;
 import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.Farm;
 
+/**
+ * Farm Class using Skandium 
+ * @author antoniomallia
+ *
+ */
 public class SkandiumFarm {
 
 	@Getter
@@ -17,6 +22,10 @@ public class SkandiumFarm {
 	private Skandium skandium;
 
 	
+	/**
+	 * Constructor
+	 * @param threads threads numbers
+	 */
 	public SkandiumFarm(int threads) {
 		skandium = new Skandium(threads);
 		Farm<Matrix, Matrix> root = new Farm<Matrix, Matrix>(
@@ -25,12 +34,22 @@ public class SkandiumFarm {
 	}
 
 
-	public Matrix compute(Matrix m) throws InterruptedException,
+	/**
+	 * @param matrix input matrix
+	 * @return computed matrix using Skandium Map
+	 * @throws InterruptedException
+	 * @throws ExecutionException
+	 */
+	public Matrix compute(Matrix matrix) throws InterruptedException,
 			ExecutionException {
-		Future<Matrix> result = stream.input(m);
+		Future<Matrix> result = stream.input(matrix);
 		return result.get();
 	}
 
+	
+	/**
+	 * Shutdown skandium
+	 */
 	public void shutdown() {
 		skandium.shutdown();
 	}

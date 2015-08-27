@@ -8,7 +8,12 @@ import cl.niclabs.skandium.Skandium;
 import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.Map;
 
-public class SkandiumMapReduce {
+/**
+ * Skandium Map Class
+ * @author antoniomallia
+ *
+ */
+public class SkandiumMap {
 
 	@Getter
 	/** Stream di input del framework */
@@ -25,7 +30,7 @@ public class SkandiumMapReduce {
 	 * @param threads
 	 *            Numero di threads con cui far eseguire il calcolo parallelo
 	 */
-	public SkandiumMapReduce(int threads) {
+	public SkandiumMap(int threads) {
 		skandium = new Skandium(threads);
 		Map<Matrix, Matrix> mapReduce = new Map<Matrix, Matrix>(
 				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(),

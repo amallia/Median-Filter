@@ -5,17 +5,21 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 
 /**
+ * Java 8 Farm Implementation
+ * 
  * @author antoniomallia
  *
  */
 public class J8Farm {
 
+	// Dedicate ForkJoinPool
 	private ForkJoinPool fjPool;
 
 	/**
 	 * Constructor
-	 * @param num thread number
-	 * @param executor implementation of the IExecutor
+	 * 
+	 * @param num
+	 *            thread number
 	 */
 	public J8Farm(int num) {
 		fjPool = new ForkJoinPool(num);
@@ -23,17 +27,19 @@ public class J8Farm {
 	}
 
 	/**
-	 * Method which invokes the executor method execute() in a farm pattern
-	 * @param input
-	 * @return
-	 * @throws ExecutionException 
-	 * @throws InterruptedException 
+	 * Method which invokes method execute() using a farm pattern
+	 * 
+	 * @param input array of input matrices
+	 * @return array of compute matrices
+	 * @throws ExecutionException
+	 * @throws InterruptedException
 	 */
-	public Matrix[] compute(Matrix[] input) throws InterruptedException, ExecutionException {
-			return (Matrix[]) fjPool.submit(
-					() -> Arrays.stream(input).parallel()
-							.map(m -> new ExecuteFilter().execute(m))
-							.toArray(size -> new Matrix[size])).get();
+	public Matrix[] compute(Matrix[] input) throws InterruptedException,
+			ExecutionException {
+		return (Matrix[]) fjPool.submit(
+				() -> Arrays.stream(input).parallel()
+						.map(m -> new ExecuteFilter().execute(m))
+						.toArray(size -> new Matrix[size])).get();
 	}
 
 }

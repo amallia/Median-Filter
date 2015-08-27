@@ -7,9 +7,9 @@ import java.util.Random;
 
 import lombok.Getter;
 
-
 /**
  * Matrix Class used to wrap the image and containing useful methods
+ * 
  * @author antoniomallia
  *
  */
@@ -17,13 +17,14 @@ public class Matrix {
 
 	@Getter
 	private int[][] matrix;
-	
+
 	/**
 	 * @return matrix height
 	 */
 	public int getHeight() {
 		return matrix.length;
 	}
+
 	/**
 	 * @return matrix width
 	 */
@@ -33,37 +34,42 @@ public class Matrix {
 
 	/**
 	 * Constructor from an array of RGB integers
-	 * @param matrix array of int
+	 * 
+	 * @param matrix
+	 *            array of int
 	 */
 	public Matrix(int[][] matrix) {
 		this.matrix = matrix;
 	}
 
-	/** 
+	/**
 	 * Constructor of an blank matrix
-	 * @param sizeRow width
-	 * @param sizeCol height
+	 * 
+	 * @param sizeRow
+	 *            width
+	 * @param sizeCol
+	 *            height
 	 */
 	public Matrix(int sizeRow, int sizeCol) {
 		matrix = new int[sizeRow][sizeCol];
 	}
 
-	
-	/** Fill the matrix with random values
+	/**
+	 * Fill the matrix with random values
+	 * 
 	 * @return the matrix generated
 	 */
-	public Matrix randomValues(){
+	public Matrix randomValues() {
 		Random rand = new Random();
 		for (int i = 0; i < getHeight(); i++) {
 			for (int j = 0; j < getWidth(); j++) {
-				matrix[i][j] = new Color(rand.nextFloat(),
-						rand.nextFloat(), rand.nextFloat())
-						.getRGB();
+				matrix[i][j] = new Color(rand.nextFloat(), rand.nextFloat(),
+						rand.nextFloat()).getRGB();
 			}
 		}
 		return this;
 	}
-	
+
 	/**
 	 * This method applies the median filter algorithm to the current matrix
 	 */
@@ -136,7 +142,7 @@ public class Matrix {
 	 *            initial column index
 	 * @param colEnd
 	 *            final column index
-	 * @return 2d array of int representing the submatrix
+	 * @return submatrix
 	 */
 	public Matrix subMatrix(int rowStart, int rowEnd, int colStart, int colEnd) {
 		// Row size of the submatrix
@@ -166,7 +172,6 @@ public class Matrix {
 							+ rowStart - 1];
 				}
 			}
-
 		}
 		return subMatrix;
 	}

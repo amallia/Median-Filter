@@ -1,18 +1,18 @@
 package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.Matrix;
-import it.antoniomallia.spm.SkandiumMapReduce;
+import it.antoniomallia.spm.SkandiumMap;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class SkandiumMapTest extends Test {
-	private SkandiumMapReduce mapreduce;
+	private SkandiumMap mapreduce;
 
 	public SkandiumMapTest(int threads) {
 		super(ExperimentType.SKANDIUM_MAPEDUCE, threads);
-		mapreduce = new SkandiumMapReduce(threads);
+		mapreduce = new SkandiumMap(threads);
 	}
 
 	@Override

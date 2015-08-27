@@ -4381,3 +4381,53 @@
 2015-08-27 19:00:50,270 INFO  - Executing Test ==> Type: Sequential	 Thread number: 0	 Matrices number: 1	 Matrix size: 1000 x 1000
 2015-08-27 19:00:50,766 INFO  - Execution time: 437 ms
 2015-08-27 19:00:50,773 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:49,585 INFO  - Performance Test started
+2015-08-27 21:46:49,588 INFO  - Executing Test ==> Type: Sequential	 Thread number: 0	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:50,606 INFO  - Execution time: 557 ms
+2015-08-27 21:46:50,608 INFO  - Executing Test ==> Type: Sequential	 Thread number: 0	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:51,135 INFO  - Execution time: 480 ms
+2015-08-27 21:46:51,139 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:51,714 INFO  - Execution time: 502 ms
+2015-08-27 21:46:51,715 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:52,195 INFO  - Execution time: 433 ms
+2015-08-27 21:46:52,197 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:52,761 INFO  - Execution time: 501 ms
+2015-08-27 21:46:52,762 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:53,242 INFO  - Execution time: 434 ms
+2015-08-27 21:46:53,248 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:53,729 INFO  - Execution time: 429 ms
+2015-08-27 21:46:53,729 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:54,200 INFO  - Execution time: 421 ms
+2015-08-27 21:46:54,201 INFO  - Executing Test ==> Type: J8-Farm	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:54,674 INFO  - Execution time: 400 ms
+2015-08-27 21:46:54,674 INFO  - Executing Test ==> Type: J8-Farm	 Thread number: 1	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:55,115 INFO  - Execution time: 398 ms
+2015-08-27 21:46:55,115 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:55,436 INFO  - Execution time: 267 ms
+2015-08-27 21:46:55,436 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:55,667 INFO  - Execution time: 187 ms
+2015-08-27 21:46:55,667 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:56,087 INFO  - Execution time: 376 ms
+2015-08-27 21:46:56,088 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:56,523 INFO  - Execution time: 384 ms
+2015-08-27 21:46:56,523 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:56,762 INFO  - Execution time: 194 ms
+2015-08-27 21:46:56,762 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:56,996 INFO  - Execution time: 188 ms
+2015-08-27 21:46:56,996 INFO  - Executing Test ==> Type: J8-Farm	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:57,437 INFO  - Execution time: 393 ms
+2015-08-27 21:46:57,438 INFO  - Executing Test ==> Type: J8-Farm	 Thread number: 2	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:57,882 INFO  - Execution time: 396 ms
+2015-08-27 21:46:57,882 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:58,114 INFO  - Execution time: 182 ms
+2015-08-27 21:46:58,115 INFO  - Executing Test ==> Type: Skandium-MapReduce	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:58,340 INFO  - Execution time: 181 ms
+2015-08-27 21:46:58,341 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:58,828 INFO  - Execution time: 443 ms
+2015-08-27 21:46:58,828 INFO  - Executing Test ==> Type: Skandium-Farm	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:59,254 INFO  - Execution time: 383 ms
+2015-08-27 21:46:59,254 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:59,473 INFO  - Execution time: 174 ms
+2015-08-27 21:46:59,474 INFO  - Executing Test ==> Type: J8-MapReduce	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000
+2015-08-27 21:46:59,698 INFO  - Execution time: 170 ms
+2015-08-27 21:46:59,698 INFO  - Executing Test ==> Type: J8-Farm	 Thread number: 3	 Matrices number: 1	 Matrix size: 1000 x 1000

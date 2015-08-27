@@ -1,6 +1,6 @@
 package it.antoniomallia.spm.test;
 
-import it.antoniomallia.spm.J8MapReduce;
+import it.antoniomallia.spm.J8Map;
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
@@ -8,11 +8,11 @@ import java.util.concurrent.ExecutionException;
 
 public class J8MapTest extends Test {
 
-	private J8MapReduce j8MapReduce;
+	private J8Map j8MapReduce;
 
 	public J8MapTest(int threads) {
 		super(ExperimentType.J8_MAPREDUCE, threads);
-		j8MapReduce = new J8MapReduce(threads);
+		j8MapReduce = new J8Map(threads);
 
 	}
 
