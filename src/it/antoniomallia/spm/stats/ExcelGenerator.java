@@ -18,28 +18,34 @@ public class ExcelGenerator {
 
 	private static Workbook wb;
 
-	private static NumberFormat numberFormat = NumberFormat.getInstance(Locale.ITALY);
+	private static NumberFormat numberFormat = NumberFormat
+			.getInstance(Locale.ITALY);
 
 	public static void generate() throws Exception {
 		wb = new XSSFWorkbook();
 		numberFormat.setMaximumFractionDigits(2);
 		for (ExperimentType type : Stats.getInstance().tests.stream()
-				.filter(e -> !e.getType().equals(ExperimentType.SEQUENTIAL)).map(e -> e.getType())
-				.distinct().collect(Collectors.toCollection(ArrayList::new))) {
+				.filter(e -> !e.getType().equals(ExperimentType.SEQUENTIAL))
+				.map(e -> e.getType()).distinct()
+				.collect(Collectors.toCollection(ArrayList::new))) {
 
 			Sheet sheet = wb.createSheet(type.getTitle());
 			int rowPos = 0;
-			long ssize = Stats.getInstance().tests.stream()
-					.filter(t -> t.getType().equals(ExperimentType.SKANDIUM_MAPEDUCE))
+			int ssize = (int) Stats.getInstance().tests
+					.stream()
+					.filter(t -> t.getType().equals(
+							ExperimentType.SKANDIUM_MAPEDUCE))
 					.map(e -> e.getStreamsize()).distinct().count();
 			Row headerRow = sheet.createRow(rowPos);
 			headerRow.createCell(0).setCellValue("Execution Time");
-			headerRow.createCell((int) (1 * ssize + 1)).setCellValue("Speedup");
-			headerRow.createCell((int) (2 * ssize + 1)).setCellValue(
-					"Efficency");
+			headerRow.createCell((1 * (ssize + 1))).setCellValue("Speedup");
+			headerRow.createCell((2 * (ssize + 1))).setCellValue("Scalability");
+			headerRow.createCell((3 * (ssize + 1))).setCellValue("Efficiency");
 			rowPos++;
-			for (int streamsize : Stats.getInstance().tests.stream()
-					.filter(t -> t.getType().equals(ExperimentType.SKANDIUM_MAPEDUCE))
+			for (int streamsize : Stats.getInstance().tests
+					.stream()
+					.filter(t -> t.getType().equals(
+							ExperimentType.SKANDIUM_MAPEDUCE))
 					.map(e -> e.getStreamsize()).distinct()
 					.collect(Collectors.toCollection(ArrayList::new))) {
 				headerRow = sheet.createRow(rowPos);
@@ -50,6 +56,13 @@ public class ExcelGenerator {
 						.map(e -> e.getSizerow()).distinct()
 						.collect(Collectors.toCollection(ArrayList::new))) {
 					headerRow.createCell(cellPos).setCellValue(i);
+					headerRow.createCell((cellPos + 1 * (ssize + 1)))
+							.setCellValue(i);
+					headerRow.createCell((cellPos + 2 * (ssize + 1)))
+							.setCellValue(i);
+					headerRow.createCell((cellPos + 3 * (ssize + 1)))
+							.setCellValue(i);
+
 					cellPos++;
 
 				}
@@ -65,7 +78,8 @@ public class ExcelGenerator {
 					cellPos = 1;
 					for (Experiment exp : Stats.getInstance().tests
 							.stream()
-							.filter(e -> (e.getType().equals(type) || e.getType()
+							.filter(e -> (e.getType().equals(type) || e
+									.getType()
 									.equals(ExperimentType.SEQUENTIAL))
 									&& e.getThread() == t
 									&& e.getStreamsize() == streamsize)
@@ -77,12 +91,14 @@ public class ExcelGenerator {
 					cellPos++;
 					long seqTime = Stats.getInstance().tests
 							.stream()
-							.filter(e -> e.getType().equals(ExperimentType.SEQUENTIAL)
+							.filter(e -> e.getType().equals(
+									ExperimentType.SEQUENTIAL)
 									&& e.getStreamsize() == streamsize)
 							.map(e -> e.getTime()).findFirst().get();
 					for (Experiment exp : Stats.getInstance().tests
 							.stream()
-							.filter(e -> e.getType().equals(type) && e.getThread() == t
+							.filter(e -> e.getType().equals(type)
+									&& e.getThread() == t
 									&& e.getStreamsize() == streamsize)
 							.collect(Collectors.toCollection(ArrayList::new))) {
 						Cell speedup = row.createCell(cellPos);
@@ -96,12 +112,12 @@ public class ExcelGenerator {
 							.stream()
 							.filter(e -> e.getType().equals(type)
 									&& e.getStreamsize() == streamsize
-									&& e.getThread() == 1).map(e -> e.getTime())
-							.findFirst().get();
+									&& e.getThread() == 1)
+							.map(e -> e.getTime()).findFirst().get();
 					for (Experiment exp : Stats.getInstance().tests
 							.stream()
-							.filter(e -> e.getType().equals(type) && e.getThread() == t
-									&& e.getThread() > 1
+							.filter(e -> e.getType().equals(type)
+									&& e.getThread() == t && e.getThread() > 1
 									&& e.getStreamsize() == streamsize)
 							.collect(Collectors.toCollection(ArrayList::new))) {
 						Cell speedup = row.createCell(cellPos);

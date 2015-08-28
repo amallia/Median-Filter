@@ -53,7 +53,7 @@ public class SkandiumMap {
 	}
 
 	/**
-	 * Method to shutdown skandium
+	 * Shutdown skandium
 	 */
 	public void shutdown() {
 		skandium.shutdown();

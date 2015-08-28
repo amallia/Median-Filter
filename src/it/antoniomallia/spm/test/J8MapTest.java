@@ -8,17 +8,17 @@ import java.util.concurrent.ExecutionException;
 
 public class J8MapTest extends Test {
 
-	private J8Map j8MapReduce;
+	private J8Map j8Map;
 
 	public J8MapTest(int threads) {
 		super(ExperimentType.J8_MAPREDUCE, threads);
-		j8MapReduce = new J8Map(threads);
+		j8Map = new J8Map(threads);
 
 	}
 
 	@Override
 	public void shutdown() {
-		j8MapReduce.shutdown();
+		j8Map.shutdown();
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class J8MapTest extends Test {
 			ExecutionException {
 		Matrix[] results = new Matrix[mats.length];
 		for (int i = 0; i < mats.length; i++) {
-			results[i] = j8MapReduce.compute(mats[i]);
+			results[i] = j8Map.compute(mats[i]);
 		}
 		return results;
 	}
