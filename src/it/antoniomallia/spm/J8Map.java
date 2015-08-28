@@ -44,5 +44,13 @@ public class J8Map {
 						.parallel().map(n -> new ExecuteFilter().execute(n))
 						.toArray(size -> new Matrix[size]))).get();
 	}
+	
+	/**
+	 * Shutdown the ForkJoinPool
+	 */
+	public void shutdown() {
+		fjPool.shutdown();
+	}
+
 
 }

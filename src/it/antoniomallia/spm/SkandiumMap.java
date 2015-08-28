@@ -53,7 +53,7 @@ public class SkandiumMap {
 	}
 
 	/**
-	 * Metodo per la disattivazione del framework parallelo
+	 * Method to shutdown skandium
 	 */
 	public void shutdown() {
 		skandium.shutdown();

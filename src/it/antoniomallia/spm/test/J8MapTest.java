@@ -18,7 +18,7 @@ public class J8MapTest extends Test {
 
 	@Override
 	public void shutdown() {
-
+		j8MapReduce.shutdown();
 	}
 
 	@Override

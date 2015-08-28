@@ -4,7 +4,7 @@ Project MedianFilter SPM_2015
 Author: Antonio Mallia (423458)
 -->
 
-<project name="MedianFilter" default="all" basedir=".">
+<project name="MedianFilter" default="jar" basedir=".">
 
 	<!-- Propery set-->
 	<property name="target" value="1.8" />
@@ -25,12 +25,12 @@ Author: Antonio Mallia (423458)
 	</target>
 
 	<!-- Init Project-->
-	<target name="prep" description="Preparation">
+	<target name="init" >
 		<mkdir dir="bin" />
 	</target>
 
 	<!-- Build Project with javac 1.8-->
-	<target name="build" depends="prep">
+	<target name="build" depends="init" description="Build the project">
 		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
 			<src path="src" />
 			<classpath refid="compile.classpath" />
@@ -38,7 +38,7 @@ Author: Antonio Mallia (423458)
 	</target>
 
 	<!-- Pack the project in a Jar-->
-	<target name="jar">
+	<target name="jar" description="Pack in a Jar">
 		<jar destfile="${ant.project.name}.jar">
 			<fileset dir="bin" />
 			<zipgroupfileset dir="lib" />
@@ -48,12 +48,10 @@ Author: Antonio Mallia (423458)
 		</jar>
 	</target>
 
-	<!-- Clean, Build and Pack-->
-	<target name="all" description="Clean, Build, Jar" depends="clean, build, jar">
-	</target>
+
 
 	<!-- JavaDoc-->
-	<target name="javadoc">
+	<target name="javadoc" description="Generate Javadoc">
 		<javadoc destdir="doc/" sourcepath="src"  author="true" use="true">
 			<classpath refid="compile.classpath" />
 		</javadoc>

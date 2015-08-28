@@ -16,7 +16,7 @@ public class J8FarmTest extends Test {
 
 	@Override
 	public void shutdown() {
-
+		j8Farm.shutdown();
 	}
 
 	@Override

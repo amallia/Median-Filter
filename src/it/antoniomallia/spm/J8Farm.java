@@ -41,5 +41,12 @@ public class J8Farm {
 						.map(m -> new ExecuteFilter().execute(m))
 						.toArray(size -> new Matrix[size])).get();
 	}
+	
+	/**
+	 * Shutdown the ForkJoinPool
+	 */
+	public void shutdown() {
+		fjPool.shutdown();
+	}
 
 }
