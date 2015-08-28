@@ -3,20 +3,17 @@ package it.antoniomallia.spm.test;
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.stats.Experiment;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
+import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
+@AllArgsConstructor
 public abstract class Test {
 
 	private static final String testExecMsg = "Executing Test ==> Type: %s\t Thread number: %s\t Matrices number: %s\t Matrix size: %s x %s";
 	private static final String timeSpentMsg = "Execution time: %s ms";
 	private ExperimentType type;
 	private int threads;
-
-	public Test(ExperimentType type, int threads) {
-		this.type = type;
-		this.threads = threads;
-	}
 
 	public abstract Matrix[] compute(Matrix[] mats) throws Exception;
 
@@ -55,8 +52,7 @@ public abstract class Test {
 
 		long computationTime = System.currentTimeMillis() - time;
 		log.info(String.format(timeSpentMsg, computationTime));
-		return new Experiment(type, streamsize, threads, sizeRow,
-				computationTime);
+		return new Experiment(streamsize, threads, sizeRow, computationTime, type);
 
 	}
 }

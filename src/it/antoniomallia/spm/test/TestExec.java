@@ -55,8 +55,10 @@ public class TestExec {
 					for (Integer sizerow : sizeRows) {
 						SequentialTest seqTest = new SequentialTest();
 						seqTest.testcompute(sizestream, sizerow, sizerow);
-						Stats.getInstance().tests.add(seqTest.testcompute(
-								sizestream, sizerow, sizerow));
+						Stats.getInstance()
+								.getTests()
+								.add(seqTest.testcompute(sizestream, sizerow,
+										sizerow));
 
 						for (Integer thread : threads) {
 
@@ -64,25 +66,33 @@ public class TestExec {
 									thread);
 							skandiumMapTest.testcompute(sizestream, sizerow,
 									sizerow);
-							Stats.getInstance().tests.add(skandiumMapTest
-									.testcompute(sizestream, sizerow, sizerow));
+							Stats.getInstance()
+									.getTests()
+									.add(skandiumMapTest.testcompute(
+											sizestream, sizerow, sizerow));
 
 							SkandiumFarmTest farmTest = new SkandiumFarmTest(
 									thread);
 							farmTest.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance().tests.add(farmTest.testcompute(
-									sizestream, sizerow, sizerow));
+							Stats.getInstance()
+									.getTests()
+									.add(farmTest.testcompute(sizestream,
+											sizerow, sizerow));
 
 							J8MapTest j8MapTest = new J8MapTest(thread);
 							j8MapTest.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance().tests.add(j8MapTest
-									.testcompute(sizestream, sizerow, sizerow));
+							Stats.getInstance()
+									.getTests()
+									.add(j8MapTest.testcompute(sizestream,
+											sizerow, sizerow));
 
 							J8FarmTest j8farmTest = new J8FarmTest(thread);
 							j8farmTest
 									.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance().tests.add(j8farmTest
-									.testcompute(sizestream, sizerow, sizerow));
+							Stats.getInstance()
+									.getTests()
+									.add(j8farmTest.testcompute(sizestream,
+											sizerow, sizerow));
 						}
 					}
 				}

@@ -24,14 +24,14 @@ public class ExcelGenerator {
 	public static void generate() throws Exception {
 		wb = new XSSFWorkbook();
 		numberFormat.setMaximumFractionDigits(2);
-		for (ExperimentType type : Stats.getInstance().tests.stream()
+		for (ExperimentType type : Stats.getInstance().getTests().stream()
 				.filter(e -> !e.getType().equals(ExperimentType.SEQUENTIAL))
 				.map(e -> e.getType()).distinct()
 				.collect(Collectors.toCollection(ArrayList::new))) {
 
 			Sheet sheet = wb.createSheet(type.getTitle());
 			int rowPos = 0;
-			int ssize = (int) Stats.getInstance().tests
+			int ssize = (int) Stats.getInstance().getTests()
 					.stream()
 					.filter(t -> t.getType().equals(
 							ExperimentType.SKANDIUM_MAPEDUCE))
@@ -42,7 +42,7 @@ public class ExcelGenerator {
 			headerRow.createCell((2 * (ssize + 1))).setCellValue("Scalability");
 			headerRow.createCell((3 * (ssize + 1))).setCellValue("Efficiency");
 			rowPos++;
-			for (int streamsize : Stats.getInstance().tests
+			for (int streamsize : Stats.getInstance().getTests()
 					.stream()
 					.filter(t -> t.getType().equals(
 							ExperimentType.SKANDIUM_MAPEDUCE))
@@ -52,7 +52,7 @@ public class ExcelGenerator {
 				Cell cell = headerRow.createCell(0);
 				cell.setCellValue("Stream size: " + streamsize);
 				int cellPos = 1;
-				for (int i : Stats.getInstance().tests.stream()
+				for (int i : Stats.getInstance().getTests().stream()
 						.map(e -> e.getSizerow()).distinct()
 						.collect(Collectors.toCollection(ArrayList::new))) {
 					headerRow.createCell(cellPos).setCellValue(i);
@@ -66,7 +66,7 @@ public class ExcelGenerator {
 					cellPos++;
 
 				}
-				for (int t : Stats.getInstance().tests.stream()
+				for (int t : Stats.getInstance().getTests().stream()
 						.map(e -> e.getThread()).distinct()
 						.collect(Collectors.toCollection(ArrayList::new))) {
 					rowPos++;
@@ -76,7 +76,7 @@ public class ExcelGenerator {
 					else
 						row.createCell(0).setCellValue("seq");
 					cellPos = 1;
-					for (Experiment exp : Stats.getInstance().tests
+					for (Experiment exp : Stats.getInstance().getTests()
 							.stream()
 							.filter(e -> (e.getType().equals(type) || e
 									.getType()
@@ -89,13 +89,13 @@ public class ExcelGenerator {
 					}
 
 					cellPos++;
-					long seqTime = Stats.getInstance().tests
+					long seqTime = Stats.getInstance().getTests()
 							.stream()
 							.filter(e -> e.getType().equals(
 									ExperimentType.SEQUENTIAL)
 									&& e.getStreamsize() == streamsize)
 							.map(e -> e.getTime()).findFirst().get();
-					for (Experiment exp : Stats.getInstance().tests
+					for (Experiment exp : Stats.getInstance().getTests()
 							.stream()
 							.filter(e -> e.getType().equals(type)
 									&& e.getThread() == t
@@ -108,13 +108,13 @@ public class ExcelGenerator {
 						cellPos++;
 					}
 					cellPos++;
-					long singleThread = Stats.getInstance().tests
+					long singleThread = Stats.getInstance().getTests()
 							.stream()
 							.filter(e -> e.getType().equals(type)
 									&& e.getStreamsize() == streamsize
 									&& e.getThread() == 1)
 							.map(e -> e.getTime()).findFirst().get();
-					for (Experiment exp : Stats.getInstance().tests
+					for (Experiment exp : Stats.getInstance().getTests()
 							.stream()
 							.filter(e -> e.getType().equals(type)
 									&& e.getThread() == t && e.getThread() > 1

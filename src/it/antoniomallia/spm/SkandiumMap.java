@@ -16,19 +16,16 @@ import cl.niclabs.skandium.skeletons.Map;
 public class SkandiumMap {
 
 	@Getter
-	/** Stream di input del framework */
 	private Stream<Matrix, Matrix> stream;
 
-	/** Oggetto skandium del framework */
 	private Skandium skandium;
 
-	/** Numero di threads con cui e' stato instanziato il framework */
 
 	/**
-	 * Costruttore principale
+	 * constructor
 	 * 
 	 * @param threads
-	 *            Numero di threads con cui far eseguire il calcolo parallelo
+	 *            Threads number
 	 */
 	public SkandiumMap(int threads) {
 		skandium = new Skandium(threads);
@@ -41,14 +38,14 @@ public class SkandiumMap {
 
 
 	/**
-	 * 
-	 * @param m
-	 * @return 
+	 * Method which computes the matrix using skandium Map
+	 * @param matrix input matrix
+	 * @return computed output matrix
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
-	public Matrix compute(Matrix m) throws InterruptedException, ExecutionException {
-		Future<Matrix> result = stream.input(m);
+	public Matrix compute(Matrix matrix) throws InterruptedException, ExecutionException {
+		Future<Matrix> result = stream.input(matrix);
 			return result.get();
 	}
 

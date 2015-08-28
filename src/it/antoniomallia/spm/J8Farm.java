@@ -4,12 +4,15 @@ import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 
+import lombok.AllArgsConstructor;
+
 /**
  * Java 8 Farm Implementation
  * 
  * @author antoniomallia
  *
  */
+@AllArgsConstructor
 public class J8Farm {
 
 	// Dedicate ForkJoinPool

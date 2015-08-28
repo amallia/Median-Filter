@@ -1,26 +1,21 @@
 package it.antoniomallia.spm;
 
+import lombok.AllArgsConstructor;
+
 /**
  * Merge Matrix class
  * 
  * @author antoniomallia
  *
  */
+@AllArgsConstructor
 public class MergeMatrix {
 
 	private int num;
 
 	/**
-	 * Constructor
+	 * Method in charge of merging an array of submatrices to a single one
 	 * 
-	 * @param num
-	 *            thread number
-	 */
-	public MergeMatrix(int num) {
-		this.num = num;
-	}
-
-	/**
 	 * @param matrices
 	 *            array of matrices
 	 * @return merged matrix
@@ -38,7 +33,8 @@ public class MergeMatrix {
 			for (int j = 0; j < num; j++) {
 				for (int k = 1; k < matrices[num * i].getHeight() - 1; k++) {
 					for (int l = 1; l < matrices[j].getWidth() - 1; l++) {
-						res[i * (matrices[num * i].getHeight()-2) + k - 1][j * (matrices[j].getWidth()-2) + l - 1] = matrices[num
+						res[i * (matrices[num * i].getHeight() - 2) + k - 1][j
+								* (matrices[j].getWidth() - 2) + l - 1] = matrices[num
 								* i + j].getMatrix()[k][l];
 					}
 				}

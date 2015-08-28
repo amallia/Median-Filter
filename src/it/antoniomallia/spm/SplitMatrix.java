@@ -1,23 +1,20 @@
 package it.antoniomallia.spm;
 
+import lombok.AllArgsConstructor;
+
 /**
+ * Split Class
  * @author antoniomallia
  *
  */
+@AllArgsConstructor
 public class SplitMatrix {
 
 	private int num;
 
-	/**
-	 * @param num
-	 */
-	public SplitMatrix(int num) {
-		this.num = num;
-	}
-
-	/**
-	 * @param matrix
-	 * @return
+	/** Method in charge of matrix split
+	 * @param matrix input matrix
+	 * @return array of submatrices ordered
 	 */
 	
 	//TODO FIX the moreRow moreCol
