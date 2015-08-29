@@ -2,6 +2,7 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.Sequential;
+import it.antoniomallia.spm.SkandiumMap;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -101,12 +102,12 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		File f = new File(Main.class.getResource("/108073.png").getPath());
+		File f = new File(Main.class.getResource("/105053.png").getPath());
 
 		BufferedImage img = ImageIO.read(f);
 		int[][] arr = new int[img.getHeight()][img.getWidth()];
-		for (int i = 0; i < img.getHeight() - 1; i++)
-			for (int j = 0; j < img.getWidth() - 1; j++) {
+		for (int i = 0; i < img.getHeight(); i++)
+			for (int j = 0; j < img.getWidth(); j++) {
 				arr[i][j] = img.getRGB(j, i);
 
 			}
@@ -148,9 +149,9 @@ public class Main {
 		// System.out.println(System.currentTimeMillis() - start + "ms");
 		// Matrix m = new Matrix(10, 10).randomValues();
 
-		// SkandiumMap map = new SkandiumMap(4);
+		 SkandiumMap map = new SkandiumMap(4);
 		Matrix m = Sequential.compute(new Matrix(arr));
-
+		//Matrix m = map.compute(new Matrix(arr));
 		File output = new File("pipposss.png");
 		ImageIO.write(m.toImage(), "jpg", output);
 

@@ -15,7 +15,9 @@ public class Sequential {
 	 * @return computed matrix
 	 */
 	public static Matrix compute(Matrix matrix) {
-		matrix.medianFilter();
+		matrix.augment();
+		new ExecuteFilter().execute(matrix);
+		matrix.diminish();
 		return matrix;
 	}
 

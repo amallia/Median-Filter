@@ -69,13 +69,26 @@ public class Matrix {
 		}
 		return this;
 	}
-
+	
+	public void augment(){
+		this.matrix=subMatrix(0, getWidth()-1, 0, getHeight()-1).matrix;
+	}
+	public void diminish(){
+		int[][] diminished = new int[getHeight()-2][getWidth()-2];
+		for (int i = 1; i < getHeight()-1; i++) {
+			for (int j = 1; j < getWidth()-1; j++) {
+				diminished[i-1][j-1]=matrix[i][j];
+			}
+		}
+		this.matrix=diminished;
+	}
+	
 	/**
 	 * This method applies the median filter algorithm to the current matrix
 	 */
 	public void medianFilter() {
 		//TODO check again
-		int[][] denoisedMatrix = this.matrix;
+		int[][] denoisedMatrix = new int[getHeight()][getWidth()];
 		// The window side length (square window)
 		int windowSize = 3;
 		// window area
@@ -90,8 +103,8 @@ public class Matrix {
 		int[] b = new int[window];
 
 		// for each pixel in the matrix (border excluded)
-		for (int i = 1; i < this.getHeight()  - edge; i++) {
-			for (int j = 1; j < this.getWidth()- edge; j++) {
+		for (int i = edge; i < this.getHeight()  - edge; i++) {
+			for (int j = edge; j < this.getWidth()- edge; j++) {
 				// get all pixel values in the window
 				for (int k = 0; k < windowSize; k++) {
 					for (int l = 0; l < windowSize; l++) {
