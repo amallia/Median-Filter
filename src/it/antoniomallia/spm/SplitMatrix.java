@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 /**
  * Split Class
+ * 
  * @author antoniomallia
  *
  */
@@ -12,24 +13,25 @@ public class SplitMatrix {
 
 	private int num;
 
-	/** Method in charge of matrix split
-	 * @param matrix input matrix
+	/**
+	 * Method in charge of matrix split
+	 * 
+	 * @param matrix
+	 *            input matrix
 	 * @return array of submatrices ordered
 	 */
-	
-	//TODO FIX the moreRow moreCol
+
+	// TODO FIX the moreRow moreCol
 	public Matrix[] split(Matrix matrix) {
-		Matrix[] mats = new Matrix[num * num];
-		int rowsize = matrix.getWidth() / num;
+		Matrix[] mats = new Matrix[num];
 		int colsize = matrix.getHeight() / num;
-		int moreRow = matrix.getWidth() % num;
-		int moreCol = matrix.getHeight() % num;
-		for (int i = 0; i < num; i++) {
-			for (int j = 0; j < num; j++) {
-				mats[num * i + j] = matrix.subMatrix((j * rowsize), ((j + 1)
-						* rowsize - 1), i * colsize, (i + 1) * colsize - 1);
-			}
+		int i;
+		for (i = 0; i < num - 1; i++) {
+			mats[i] = matrix.subMatrix(0, matrix.getWidth() - 1, i * colsize,
+					(i + 1) * colsize - 1);
 		}
+		mats[num-1] = matrix.subMatrix(0, matrix.getWidth() - 1, i * colsize,
+				matrix.getHeight() - 1);
 		return mats;
 	}
 }

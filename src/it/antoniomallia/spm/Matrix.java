@@ -51,7 +51,7 @@ public class Matrix {
 	 *            height
 	 */
 	public Matrix(int sizeRow, int sizeCol) {
-		matrix = new int[sizeRow][sizeCol];
+		matrix = new int[sizeCol][sizeRow];
 	}
 
 	/**
@@ -74,7 +74,8 @@ public class Matrix {
 	 * This method applies the median filter algorithm to the current matrix
 	 */
 	public void medianFilter() {
-		int[][] denoisedMatrix = new int[getHeight()][getWidth()];
+		//TODO check again
+		int[][] denoisedMatrix = this.matrix;
 		// The window side length (square window)
 		int windowSize = 3;
 		// window area
@@ -89,8 +90,8 @@ public class Matrix {
 		int[] b = new int[window];
 
 		// for each pixel in the matrix (border excluded)
-		for (int i = 1; i < this.getWidth() - edge; i++) {
-			for (int j = 1; j < this.getHeight() - edge; j++) {
+		for (int i = 1; i < this.getHeight()  - edge; i++) {
+			for (int j = 1; j < this.getWidth()- edge; j++) {
 				// get all pixel values in the window
 				for (int k = 0; k < windowSize; k++) {
 					for (int l = 0; l < windowSize; l++) {
@@ -125,9 +126,9 @@ public class Matrix {
 	public BufferedImage toImage() {
 		BufferedImage image = new BufferedImage(this.getWidth(),
 				this.getHeight(), BufferedImage.TYPE_INT_RGB);
-		for (int i = 0; i < this.getWidth(); i++)
-			for (int j = 0; j < this.getHeight(); j++)
-				image.setRGB(i, j, matrix[i][j]);
+		for (int i = 0; i < this.getHeight(); i++)
+			for (int j = 0; j < this.getWidth(); j++)
+				image.setRGB(j, i, matrix[i][j]);
 		return image;
 	}
 

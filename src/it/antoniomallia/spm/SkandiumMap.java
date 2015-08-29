@@ -31,7 +31,7 @@ public class SkandiumMap {
 		skandium = new Skandium(threads);
 		Map<Matrix, Matrix> mapReduce = new Map<Matrix, Matrix>(
 				new SkandiumSplitMatrix(threads), new SkandiumExecuteFilter(),
-				new SkandiumMergeMatrix(threads));
+				new SkandiumMergeMatrix());
 		stream = skandium.newStream(mapReduce);
 
 	}

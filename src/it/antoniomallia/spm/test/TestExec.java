@@ -99,11 +99,11 @@ public class TestExec {
 				ExcelGenerator.generate();
 			}
 			if (line.hasOption("h")) {
-				formatter.printHelp("a", options, true);
+				formatter.printHelp("medianFilter", options, true);
 
 			}
 		} catch (ParseException exp) {
-			formatter.printHelp("a", options, true);
+			formatter.printHelp("medianFilter", options, true);
 		}
 		System.exit(0);
 

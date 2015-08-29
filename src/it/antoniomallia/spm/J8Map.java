@@ -39,7 +39,7 @@ public class J8Map {
 	public Matrix compute(Matrix input) throws InterruptedException,
 			ExecutionException {
 		return fjPool.submit(
-				() -> new MergeMatrix(threads).merge(Arrays
+				() -> new MergeMatrix().merge(Arrays
 						.stream(new SplitMatrix(threads).split(input))
 						.parallel().map(n -> new ExecuteFilter().execute(n))
 						.toArray(size -> new Matrix[size]))).get();

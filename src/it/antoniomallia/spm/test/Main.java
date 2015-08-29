@@ -1,7 +1,7 @@
 package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.Matrix;
-import it.antoniomallia.spm.SkandiumMap;
+import it.antoniomallia.spm.Sequential;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,8 +9,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Main {
-
-	private static final String headerMsg = " __  __          _ _             _____ _ _ _\r\n|  \\/  | ___  __| (_) __ _ _ __ |  ___(_) | |_ ___ _ __\r\n| |\\/| |/ _ \\/ _` | |/ _` | '_ \\| |_  | | | __/ _ \\ '__|\r\n| |  | |  __/ (_| | | (_| | | | |  _| | | | ||  __/ |\r\n|_|  |_|\\___|\\__,_|_|\\__,_|_| |_|_|   |_|_|\\__\\___|_| ";
 
 	//
 	// public static int randInt(int min, int max) {
@@ -73,22 +71,22 @@ public class Main {
 		// }
 		// System.exit(0);
 
-//		OpenCV.loadShared();
-//		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		//
-//		Mat image = Highgui.imread(Main.class.getResource("/balloons_noisy.png")
-//				.getPath());
-		// long start =System.currentTimeMillis();
-		//
-//		 Imgproc.medianBlur(image, image, 1);
-		// System.out.println(System.currentTimeMillis()-start+"ms");
-		//
-		//
-		//
-		// // Save the visualized detection.
-//		 String filename = "faceDetection.png";
-//		// System.out.println(String.format("Writing %s", filename));
-//		 Highgui.imwrite(filename, image);
+		// OpenCV.loadShared();
+		// System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+		// //
+		// Mat image = Highgui.imread(Main.class.getResource("/balloons.png")
+		// .getPath());
+		// // long start =System.currentTimeMillis();
+		// //
+		// Imgproc.medianBlur(image, image, 3);
+		// // System.out.println(System.currentTimeMillis()-start+"ms");
+		// //
+		// //
+		// //
+		// // // Save the visualized detection.
+		// String filename = "faceDetection.png";
+		// // // System.out.println(String.format("Writing %s", filename));
+		// Highgui.imwrite(filename, image);
 
 		/*
 		 * Logic: Captures the colour of 8 pixels around the target
@@ -103,22 +101,27 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		File f = new File(Main.class.getResource("/balloons_noisy.png")
-				.getPath());
+		File f = new File(Main.class.getResource("/108073.png").getPath());
 
-		 BufferedImage img = ImageIO.read(f);
-		 int[][] arr = new int[img.getWidth()][img.getHeight()];
-		 for (int i = 0; i < img.getWidth(); i++)
-		 for (int j = 0; j < img.getHeight(); j++) {
-		 arr[i][j] = img.getRGB(i, j);
-		
-		 }
+		BufferedImage img = ImageIO.read(f);
+		int[][] arr = new int[img.getHeight()][img.getWidth()];
+		for (int i = 0; i < img.getHeight() - 1; i++)
+			for (int j = 0; j < img.getWidth() - 1; j++) {
+				arr[i][j] = img.getRGB(j, i);
+
+			}
 
 		// Matrix[] arrM = new Matrix[4];
 		// for (int i = 0; i < arrM.length; i++) {
 		// arrM[i] = new Matrix(4000, 4000);
 		// }
-
+		// Matrix m = new Matrix(4, 4);
+		// Matrix[] ma= new SplitMatrix(2).split(m);
+		//
+		// System.out.println(ma.length);
+		// System.out.println(ma[0].getHeight()+" "+ma[0].getWidth());
+		//
+		// ma[0].medianFilter();
 		// List<int[][]> array = new ArrayList<int[][]>();
 		// array.add(arr);
 		// long start = System.currentTimeMillis();
@@ -145,9 +148,9 @@ public class Main {
 		// System.out.println(System.currentTimeMillis() - start + "ms");
 		// Matrix m = new Matrix(10, 10).randomValues();
 
-		SkandiumMap map = new SkandiumMap(4);
-		Matrix m = map.compute(new Matrix(arr));
-		
+		// SkandiumMap map = new SkandiumMap(4);
+		Matrix m = Sequential.compute(new Matrix(arr));
+
 		File output = new File("pipposss.png");
 		ImageIO.write(m.toImage(), "jpg", output);
 
