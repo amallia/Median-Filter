@@ -19,8 +19,8 @@ public class Experiment {
 	 *
 	 */
 	public enum ExperimentType {
-		SEQUENTIAL("Sequential"), SKANDIUM_MAPEDUCE("Skandium-MapReduce"), J8_MAPREDUCE(
-				"J8-MapReduce"), SKANDIUM_FARM("Skandium-Farm"), J8_FARM(
+		SEQUENTIAL("Sequential"), SKANDIUM_MAP("Skandium-Map"), J8_MAP(
+				"J8-Map"), SKANDIUM_FARM("Skandium-Farm"), J8_FARM(
 				"J8-Farm");
 		
 		/**

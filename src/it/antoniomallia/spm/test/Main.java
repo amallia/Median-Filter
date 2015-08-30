@@ -1,13 +1,5 @@
 package it.antoniomallia.spm.test;
 
-import it.antoniomallia.spm.Matrix;
-import it.antoniomallia.spm.Sequential;
-import it.antoniomallia.spm.SkandiumMap;
-
-import java.awt.image.BufferedImage;
-import java.io.File;
-
-import javax.imageio.ImageIO;
 
 public class Main {
 
@@ -72,15 +64,15 @@ public class Main {
 		// }
 		// System.exit(0);
 
-		// OpenCV.loadShared();
-		// System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
-		// //
-		// Mat image = Highgui.imread(Main.class.getResource("/balloons.png")
-		// .getPath());
-		// // long start =System.currentTimeMillis();
-		// //
-		// Imgproc.medianBlur(image, image, 3);
-		// // System.out.println(System.currentTimeMillis()-start+"ms");
+//		 OpenCV.loadShared();
+//		 System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+//		// //
+//		 Mat image = Highgui.imread(Main.class.getResource("/balloons_noisy.png")
+//		 .getPath());
+//		  long start =System.currentTimeMillis();
+//		// //
+//		 Imgproc.medianBlur(image, image, 3);
+//		  System.out.println(System.currentTimeMillis()-start+"ms");
 		// //
 		// //
 		// //
@@ -102,15 +94,15 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-		File f = new File(Main.class.getResource("/105053.png").getPath());
-
-		BufferedImage img = ImageIO.read(f);
-		int[][] arr = new int[img.getHeight()][img.getWidth()];
-		for (int i = 0; i < img.getHeight(); i++)
-			for (int j = 0; j < img.getWidth(); j++) {
-				arr[i][j] = img.getRGB(j, i);
-
-			}
+//		File f = new File(Main.class.getResource("/balloons_noisy.png").getPath());
+//
+//		BufferedImage img = ImageIO.read(f);
+//		int[][] arr = new int[img.getHeight()][img.getWidth()];
+//		for (int i = 0; i < img.getHeight(); i++)
+//			for (int j = 0; j < img.getWidth(); j++) {
+//				arr[i][j] = img.getRGB(j, i);
+//
+//			}
 
 		// Matrix[] arrM = new Matrix[4];
 		// for (int i = 0; i < arrM.length; i++) {
@@ -149,11 +141,15 @@ public class Main {
 		// System.out.println(System.currentTimeMillis() - start + "ms");
 		// Matrix m = new Matrix(10, 10).randomValues();
 
-		 SkandiumMap map = new SkandiumMap(4);
-		Matrix m = Sequential.compute(new Matrix(arr));
-		//Matrix m = map.compute(new Matrix(arr));
-		File output = new File("pipposss.png");
-		ImageIO.write(m.toImage(), "jpg", output);
+		// SkandiumMap map = new SkandiumMap(3);
+//		long start = System.currentTimeMillis();
+//
+//		Matrix m = Sequential.compute(new Matrix(arr));
+//		System.out.println(System.currentTimeMillis() - start + "ms");
+//
+//		// Matrix m = map.compute(new Matrix(arr));
+//		File output = new File("pipposss.png");
+//		ImageIO.write(m.toImage(), "jpg", output);
 
 		// SkandiumMapTest map = new SkandiumMapTest(4);
 		// map.testcompute(1, 4000, 4000);

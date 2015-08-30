@@ -1,7 +1,6 @@
 package it.antoniomallia.spm;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 
 import lombok.AllArgsConstructor;
@@ -32,19 +31,19 @@ public class J8Farm {
 	/**
 	 * Method which invokes method execute() using a farm pattern
 	 * 
-	 * @param input array of input matrices
+	 * @param input
+	 *            array of input matrices
 	 * @return array of compute matrices
-	 * @throws ExecutionException
-	 * @throws InterruptedException
+	 * @throws Exception
+	 *             exception for computation
 	 */
-	public Matrix[] compute(Matrix[] input) throws InterruptedException,
-			ExecutionException {
+	public Matrix[] compute(Matrix[] input) throws Exception {
 		return (Matrix[]) fjPool.submit(
 				() -> Arrays.stream(input).parallel()
 						.map(m -> new ExecuteFilter().execute(m))
 						.toArray(size -> new Matrix[size])).get();
 	}
-	
+
 	/**
 	 * Shutdown the ForkJoinPool
 	 */

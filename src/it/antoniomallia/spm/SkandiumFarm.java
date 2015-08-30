@@ -1,6 +1,5 @@
 package it.antoniomallia.spm;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import lombok.Getter;
@@ -9,7 +8,8 @@ import cl.niclabs.skandium.Stream;
 import cl.niclabs.skandium.skeletons.Farm;
 
 /**
- * Farm Class using Skandium 
+ * Farm Class using Skandium
+ * 
  * @author antoniomallia
  *
  */
@@ -21,10 +21,11 @@ public class SkandiumFarm {
 	/** Oggetto skandium del framework */
 	private Skandium skandium;
 
-	
 	/**
 	 * Constructor
-	 * @param threads threads numbers
+	 * 
+	 * @param threads
+	 *            threads numbers
 	 */
 	public SkandiumFarm(int threads) {
 		skandium = new Skandium(threads);
@@ -33,20 +34,18 @@ public class SkandiumFarm {
 		stream = skandium.newStream(root);
 	}
 
-
 	/**
-	 * @param matrix input matrix
+	 * @param matrix
+	 *            input matrix
 	 * @return computed matrix using Skandium Map
-	 * @throws InterruptedException
-	 * @throws ExecutionException
+	 * @throws Exception
+	 *             exception for computation
 	 */
-	public Matrix compute(Matrix matrix) throws InterruptedException,
-			ExecutionException {
+	public Matrix compute(Matrix matrix) throws Exception {
 		Future<Matrix> result = stream.input(matrix);
 		return result.get();
 	}
 
-	
 	/**
 	 * Shutdown skandium
 	 */

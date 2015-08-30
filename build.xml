@@ -7,6 +7,11 @@ Author: Antonio Mallia (423458)
 <project name="MedianFilter" default="jar" basedir=".">
 
 	<!-- Propery set-->
+	<property name="src-dir" value="src" />
+	<property name="lib-dir" value="lib" />
+	<property name="bin-dir" value="bin" />
+	<property name="dist-dir" value="dist" />
+	<property name="doc-dir" value="doc" />
 	<property name="target" value="1.8" />
 	<property name="source" value="1.8" />
 	<property name="debuglevel" value="source,lines,vars" />
@@ -14,45 +19,46 @@ Author: Antonio Mallia (423458)
 
 	<!-- Compile Classpath -->
 	<path id="compile.classpath">
-		<fileset dir="lib">
+		<fileset dir="${lib-dir}">
 			<include name="*.jar" />
 		</fileset>
 	</path>
 
 	<!-- Clean project-->
 	<target name="clean" description="Delete bin folder">
-		<delete dir="bin" />
+		<delete dir="${bin-dir}" />
+		<delete dir="${dist-dir}" />
 	</target>
 
 	<!-- Init Project-->
 	<target name="init" >
-		<mkdir dir="bin" />
+		<mkdir dir="${bin-dir}" />
+		<mkdir dir="${dist-dir}" />
+		<copy file="${src-dir}/log4j2.xml" tofile="${bin-dir}/log4j2.xml"/>
 	</target>
 
 	<!-- Build Project with javac 1.8-->
 	<target name="build" depends="init" description="Build the project">
-		<javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
-			<src path="src" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${bin-dir}" includeantruntime="false" source="${source}" target="${target}">
+			<src path="${src-dir}" />
 			<classpath refid="compile.classpath" />
 		</javac>
 	</target>
 
 	<!-- Pack the project in a Jar-->
-	<target name="jar" description="Pack in a Jar">
-		<jar destfile="${ant.project.name}.jar">
-			<fileset dir="bin" />
-			<zipgroupfileset dir="lib" />
+	<target name="jar" description="Pack in a Jar" depends="build">
+		<jar destfile="${dist-dir}/${ant.project.name}.jar">
+			<fileset dir="${bin-dir}" />
+			<zipgroupfileset dir="${lib-dir}" />
 			<manifest>
 				<attribute name="Main-Class" value="${main-class}" />
 			</manifest>
 		</jar>
 	</target>
 
-
-
 	<!-- JavaDoc-->
 	<target name="javadoc" description="Generate Javadoc">
-		<javadoc destdir="doc/" sourcepath="src"  author="true" use="true">
+		<javadoc destdir="${doc-dir}" sourcepath="${src-dir}"  author="true" use="true">
 			<classpath refid="compile.classpath" />
 		</javadoc>
 	</target>

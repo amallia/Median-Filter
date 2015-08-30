@@ -20,7 +20,7 @@ public class J8FarmTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] mats) throws InterruptedException, ExecutionException {
+	public Matrix[] compute(Matrix[] mats) throws Exception {
 		return j8Farm.compute(mats);
 
 	}

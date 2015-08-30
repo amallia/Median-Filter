@@ -17,7 +17,7 @@ public class MergeMatrix {
 		for (int i = 0; i < matrices.length; i++) {
 			for (int k = 1; k < matrices[i].getHeight() - 1; k++) {
 				for (int l = 1; l < matrices[i].getWidth() - 1; l++) {
-					res[i * (matrices[i].getHeight() - 2) + k - 1][l - 1] = matrices[i]
+					res[i * (matrices[0].getHeight() - 2) + k - 1][l - 1] = matrices[i]
 							.getMatrix()[k][l];
 				}
 			}

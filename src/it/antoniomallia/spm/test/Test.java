@@ -37,10 +37,13 @@ public abstract class Test {
 	 *            Numero di righe delle matrici
 	 * @param sizeCol
 	 *            Numero di colonne delle matrici
-	 *            
+	 * 
+	 * @throws Exception exception for computation
+	 * 
 	 * @return Execution stats
 	 */
-	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol) throws Exception{
+	public Experiment testcompute(int streamsize, int sizeRow, int sizeCol)
+			throws Exception {
 
 		log.info(String.format(testExecMsg, type.getTitle(), threads,
 				streamsize, sizeRow, sizeCol));
@@ -52,7 +55,8 @@ public abstract class Test {
 
 		long computationTime = System.currentTimeMillis() - time;
 		log.info(String.format(timeSpentMsg, computationTime));
-		return new Experiment(streamsize, threads, sizeRow, computationTime, type);
+		return new Experiment(streamsize, threads, sizeRow, computationTime,
+				type);
 
 	}
 }

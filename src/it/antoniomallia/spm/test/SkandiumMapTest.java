@@ -11,7 +11,7 @@ public class SkandiumMapTest extends Test {
 	private SkandiumMap mapreduce;
 
 	public SkandiumMapTest(int threads) {
-		super(ExperimentType.SKANDIUM_MAPEDUCE, threads);
+		super(ExperimentType.SKANDIUM_MAP, threads);
 		mapreduce = new SkandiumMap(threads);
 	}
 

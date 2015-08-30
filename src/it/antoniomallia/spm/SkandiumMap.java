@@ -1,6 +1,5 @@
 package it.antoniomallia.spm;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import lombok.Getter;
@@ -41,10 +40,9 @@ public class SkandiumMap {
 	 * Method which computes the matrix using skandium Map
 	 * @param matrix input matrix
 	 * @return computed output matrix
-	 * @throws ExecutionException 
-	 * @throws InterruptedException 
+	 * @throws Exception exception for computation  
 	 */
-	public Matrix compute(Matrix matrix) throws InterruptedException, ExecutionException {
+	public Matrix compute(Matrix matrix) throws Exception {
 		Future<Matrix> result = stream.input(matrix);
 			return result.get();
 	}

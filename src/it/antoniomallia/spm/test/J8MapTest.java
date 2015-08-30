@@ -11,7 +11,7 @@ public class J8MapTest extends Test {
 	private J8Map j8Map;
 
 	public J8MapTest(int threads) {
-		super(ExperimentType.J8_MAPREDUCE, threads);
+		super(ExperimentType.J8_MAP, threads);
 		j8Map = new J8Map(threads);
 
 	}
@@ -22,8 +22,7 @@ public class J8MapTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] mats) throws InterruptedException,
-			ExecutionException {
+	public Matrix[] compute(Matrix[] mats) throws Exception {
 		Matrix[] results = new Matrix[mats.length];
 		for (int i = 0; i < mats.length; i++) {
 			results[i] = j8Map.compute(mats[i]);

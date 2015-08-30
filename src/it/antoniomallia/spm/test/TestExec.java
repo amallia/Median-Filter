@@ -2,6 +2,7 @@ package it.antoniomallia.spm.test;
 
 import it.antoniomallia.spm.stats.ExcelGenerator;
 import it.antoniomallia.spm.stats.Stats;
+import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
 import java.util.Arrays;
 import java.util.stream.IntStream;
@@ -53,57 +54,105 @@ public class TestExec {
 				log.info(testStartedMsg);
 				for (Integer sizestream : sizestreams) {
 					for (Integer sizerow : sizeRows) {
-						SequentialTest seqTest = new SequentialTest();
-						seqTest.testcompute(sizestream, sizerow, sizerow);
-						Stats.getInstance()
-								.getTests()
-								.add(seqTest.testcompute(sizestream, sizerow,
-										sizerow));
+						try {
+							SequentialTest seqTest = new SequentialTest();
+							seqTest.testcompute(sizestream, sizerow, sizerow);
+							Stats.getInstance()
+									.getTests()
+									.add(seqTest.testcompute(sizestream,
+											sizerow, sizerow));
+						} catch (OutOfMemoryError e) {
+							log.info(String
+									.format("OutOfMemoryError => Type: %s	 Thread number: %s	 Matrices number: %s	 Matrix size: %s x %s",
+											ExperimentType.SEQUENTIAL
+													.getTitle(), "0",
+											sizestream, sizerow, sizerow));
+						}
 
 						for (Integer thread : threads) {
 
-							SkandiumMapTest skandiumMapTest = new SkandiumMapTest(
-									thread);
-							skandiumMapTest.testcompute(sizestream, sizerow,
-									sizerow);
-							Stats.getInstance()
-									.getTests()
-									.add(skandiumMapTest.testcompute(
-											sizestream, sizerow, sizerow));
+							try {
 
-							SkandiumFarmTest farmTest = new SkandiumFarmTest(
-									thread);
-							farmTest.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance()
-									.getTests()
-									.add(farmTest.testcompute(sizestream,
-											sizerow, sizerow));
+								SkandiumMapTest skandiumMapTest = new SkandiumMapTest(
+										thread);
+								skandiumMapTest.testcompute(sizestream,
+										sizerow, sizerow);
+								Stats.getInstance()
+										.getTests()
+										.add(skandiumMapTest.testcompute(
+												sizestream, sizerow, sizerow));
 
-							J8MapTest j8MapTest = new J8MapTest(thread);
-							j8MapTest.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance()
-									.getTests()
-									.add(j8MapTest.testcompute(sizestream,
-											sizerow, sizerow));
+							} catch (OutOfMemoryError e) {
+								log.info(String
+										.format("OutOfMemoryError => Type: %s	 Thread number: %s	 Matrices number: %s	 Matrix size: %s x %s",
+												ExperimentType.SKANDIUM_MAP
+														.getTitle(), thread,
+												sizestream, sizerow, sizerow));
+							}
+							try {
 
-							J8FarmTest j8farmTest = new J8FarmTest(thread);
-							j8farmTest
-									.testcompute(sizestream, sizerow, sizerow);
-							Stats.getInstance()
-									.getTests()
-									.add(j8farmTest.testcompute(sizestream,
-											sizerow, sizerow));
+								SkandiumFarmTest farmTest = new SkandiumFarmTest(
+										thread);
+								farmTest.testcompute(sizestream, sizerow,
+										sizerow);
+								Stats.getInstance()
+										.getTests()
+										.add(farmTest.testcompute(sizestream,
+												sizerow, sizerow));
+
+							} catch (OutOfMemoryError e) {
+								log.info(String
+										.format("OutOfMemoryError => Type: %s	 Thread number: %s	 Matrices number: %s	 Matrix size: %s x %s",
+												ExperimentType.SKANDIUM_FARM
+														.getTitle(), thread,
+												sizestream, sizerow, sizerow));
+							}
+
+							try {
+
+								J8MapTest j8MapTest = new J8MapTest(thread);
+								j8MapTest.testcompute(sizestream, sizerow,
+										sizerow);
+								Stats.getInstance()
+										.getTests()
+										.add(j8MapTest.testcompute(sizestream,
+												sizerow, sizerow));
+
+							} catch (OutOfMemoryError e) {
+								log.info(String
+										.format("OutOfMemoryError => Type: %s	 Thread number: %s	 Matrices number: %s	 Matrix size: %s x %s",
+												ExperimentType.J8_MAP
+														.getTitle(), thread,
+												sizestream, sizerow, sizerow));
+							}
+							try {
+
+								J8FarmTest j8farmTest = new J8FarmTest(thread);
+								j8farmTest.testcompute(sizestream, sizerow,
+										sizerow);
+								Stats.getInstance()
+										.getTests()
+										.add(j8farmTest.testcompute(sizestream,
+												sizerow, sizerow));
+
+							} catch (OutOfMemoryError e) {
+								log.info(String
+										.format("OutOfMemoryError => Type: %s	 Thread number: %s	 Matrices number: %s	 Matrix size: %s x %s",
+												ExperimentType.J8_FARM
+														.getTitle(), thread,
+												sizestream, sizerow, sizerow));
+							}
 						}
 					}
 				}
 				ExcelGenerator.generate();
 			}
 			if (line.hasOption("h")) {
-				formatter.printHelp("medianFilter", options, true);
+				formatter.printHelp("MedianFilter", options, true);
 
 			}
 		} catch (ParseException exp) {
-			formatter.printHelp("medianFilter", options, true);
+			formatter.printHelp("MedianFilter", options, true);
 		}
 		System.exit(0);
 

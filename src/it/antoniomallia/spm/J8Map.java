@@ -1,7 +1,6 @@
 package it.antoniomallia.spm;
 
 import java.util.Arrays;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 
 /**
@@ -33,24 +32,22 @@ public class J8Map {
 	 * @param input
 	 *            matrix
 	 * @return computed output matrix
-	 * @throws InterruptedException
-	 * @throws ExecutionException
+	 * @throws Exception
+	 *             exception for computation
 	 */
-	public Matrix compute(Matrix input) throws InterruptedException,
-			ExecutionException {
+	public Matrix compute(Matrix input) throws Exception {
 		return fjPool.submit(
 				() -> new MergeMatrix().merge(Arrays
 						.stream(new SplitMatrix(threads).split(input))
 						.parallel().map(n -> new ExecuteFilter().execute(n))
 						.toArray(size -> new Matrix[size]))).get();
 	}
-	
+
 	/**
 	 * Shutdown the ForkJoinPool
 	 */
 	public void shutdown() {
 		fjPool.shutdown();
 	}
-
 
 }
