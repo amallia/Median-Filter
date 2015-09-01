@@ -3,7 +3,6 @@
 *.xlsx
 .DS_Store
 *.class
-*.jar
 .project
 .classpath
 bin/

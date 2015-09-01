@@ -4,7 +4,7 @@ Project MedianFilter SPM_2015
 Author: Antonio Mallia (423458)
 -->
 
-<project name="MedianFilter" default="jar" basedir=".">
+<project name="MedianFilter" default="jar" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
 
 	<!-- Propery set-->
 	<property name="src-dir" value="src" />
@@ -28,10 +28,19 @@ Author: Antonio Mallia (423458)
 	<target name="clean" description="Delete bin folder">
 		<delete dir="${bin-dir}" />
 		<delete dir="${dist-dir}" />
+		<ivy:cleancache/>
 	</target>
+	
+    <target name="bootstrap" description="Install ivy">
+           <mkdir dir="${user.home}/.ant/lib"/>
+           <get dest="${user.home}/.ant/lib/ivy.jar" src="https://repo1.maven.org/maven2/org/apache/ivy/ivy/2.4.0/ivy-2.4.0.jar"/>
+       </target>
 
 	<!-- Init Project-->
-	<target name="init" >
+	<target name="init" depends="bootstrap" >
+        <ivy:resolve/>
+		<ivy:retrieve />
+		
 		<mkdir dir="${bin-dir}" />
 		<mkdir dir="${dist-dir}" />
 		<copy file="${src-dir}/log4j2.xml" tofile="${bin-dir}/log4j2.xml"/>
