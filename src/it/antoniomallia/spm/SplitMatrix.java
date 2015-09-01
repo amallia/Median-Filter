@@ -21,7 +21,6 @@ public class SplitMatrix {
 	 * @return array of submatrices ordered
 	 */
 
-	// TODO FIX the moreRow moreCol
 	public Matrix[] split(Matrix matrix) {
 		Matrix[] mats = new Matrix[num];
 		int colsize = matrix.getHeight() / num;

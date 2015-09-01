@@ -1,5 +1,15 @@
 package it.antoniomallia.spm.test;
 
+import it.antoniomallia.spm.J8Farm;
+import it.antoniomallia.spm.Matrix;
+import it.antoniomallia.spm.SkandiumFarm;
+import it.antoniomallia.spm.SkandiumMap;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+
 
 public class Main {
 
@@ -94,17 +104,27 @@ public class Main {
 		// salt(input, 1000000);
 		// Highgui.imwrite("output.png", input);
 
-//		File f = new File(Main.class.getResource("/balloons_noisy.png").getPath());
-//
-//		BufferedImage img = ImageIO.read(f);
-//		int[][] arr = new int[img.getHeight()][img.getWidth()];
-//		for (int i = 0; i < img.getHeight(); i++)
-//			for (int j = 0; j < img.getWidth(); j++) {
-//				arr[i][j] = img.getRGB(j, i);
-//
-//			}
+		File f = new File(Main.class.getResource("/balloons.png").getPath());
 
-		// Matrix[] arrM = new Matrix[4];
+		BufferedImage img = ImageIO.read(f);
+		int[][] arr = new int[img.getHeight()][img.getWidth()];
+		for (int i = 0; i < img.getHeight(); i++)
+			for (int j = 0; j < img.getWidth(); j++) {
+				arr[i][j] = img.getRGB(j, i);
+
+			}
+		
+
+		 Matrix[] arrM = new Matrix[4];
+		 for (int i = 0; i < arrM.length; i++) {
+			arrM[i]= new Matrix(arr);
+		}
+		 
+		 for (int i = 1; i < arrM.length+1; i++) {
+				File output = new File(i+1000+".png");
+				ImageIO.write(arrM[i-1].toImage(), "jpg", output);
+			
+			}
 		// for (int i = 0; i < arrM.length; i++) {
 		// arrM[i] = new Matrix(4000, 4000);
 		// }
@@ -146,7 +166,41 @@ public class Main {
 //
 //		Matrix m = Sequential.compute(new Matrix(arr));
 //		System.out.println(System.currentTimeMillis() - start + "ms");
-//
+
+		 SkandiumFarm farm = new SkandiumFarm(4);
+		
+			Matrix[] arrMat=   farm.compute(arrM);
+			for (int i = 1; i < arrMat.length+1; i++) {
+				File output = new File(i+".png");
+				ImageIO.write(arrM[i-1].toImage(), "jpg", output);
+			
+			}
+//		 
+			
+			  arrM = new Matrix[4];
+			 for (int i = 0; i < arrM.length; i++) {
+				arrM[i]= new Matrix(arr);
+			}
+		J8Farm j8farm = new J8Farm(4);
+		 
+		 arrMat=  j8farm.compute(arrM);
+		for (int i = 1; i < arrMat.length+1; i++) {
+			File output = new File(i*100+".png");
+			ImageIO.write(arrMat[i-1].toImage(), "jpg", output);
+		
+		}
+		 arrM = new Matrix[4];
+		 for (int i = 0; i < arrM.length; i++) {
+			arrM[i]= new Matrix(arr);
+		}
+		 SkandiumMap map = new SkandiumMap(4);
+			File output = new File("output.png");
+
+			ImageIO.write(map.compute(arrM[0]).toImage(), "jpg", output);
+
+		 
+		 
+		 
 //		// Matrix m = map.compute(new Matrix(arr));
 //		File output = new File("pipposss.png");
 //		ImageIO.write(m.toImage(), "jpg", output);

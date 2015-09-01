@@ -4,8 +4,6 @@ import it.antoniomallia.spm.J8Farm;
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
-import java.util.concurrent.ExecutionException;
-
 public class J8FarmTest extends Test {
 	private J8Farm j8Farm;
 

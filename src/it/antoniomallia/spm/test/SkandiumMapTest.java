@@ -4,7 +4,6 @@ import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.SkandiumMap;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 public class SkandiumMapTest extends Test {
@@ -16,7 +15,7 @@ public class SkandiumMapTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] initmat) {
+	public Matrix[] compute(Matrix[] initmat) throws Exception{
 		@SuppressWarnings("unchecked")
 		Future<Matrix>[] futResults = new Future[initmat.length];
 		Matrix[] results = new Matrix[initmat.length];
@@ -26,12 +25,7 @@ public class SkandiumMapTest extends Test {
 		}
 
 		for (int i = 0; i < initmat.length; i++) {
-			try {
 				results[i] = futResults[i].get();
-			} catch (InterruptedException | ExecutionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		return results;
 	}

@@ -5,7 +5,6 @@ import it.antoniomallia.spm.SkandiumFarm;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 public class SkandiumFarmTest extends Test {
 
@@ -22,19 +21,9 @@ public class SkandiumFarmTest extends Test {
 	}
 
 	@Override
-	public Matrix[] compute(Matrix[] mats) throws InterruptedException,
+	public Matrix[] compute(Matrix[] mats) throws Exception,
 			ExecutionException {
-		@SuppressWarnings("unchecked")
-		Future<Matrix>[] futResults = new Future[mats.length];
-		Matrix[] results = new Matrix[mats.length];
-		for (int i = 0; i < mats.length; i++) {
-			futResults[i] = farm.getStream().input(mats[i]);
-		}
-
-		for (int i = 0; i < mats.length; i++) {
-			results[i] = futResults[i].get();
-		}
-		return results;
+		return farm.compute(mats);
 	}
 
 }

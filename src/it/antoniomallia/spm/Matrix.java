@@ -87,7 +87,6 @@ public class Matrix {
 	 * This method applies the median filter algorithm to the current matrix
 	 */
 	public void medianFilter() {
-		//TODO check again
 		int[][] denoisedMatrix = new int[getHeight()][getWidth()];
 		// The window side length (square window)
 		int windowSize = 3;

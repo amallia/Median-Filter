@@ -4,8 +4,6 @@ import it.antoniomallia.spm.J8Map;
 import it.antoniomallia.spm.Matrix;
 import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
-import java.util.concurrent.ExecutionException;
-
 public class J8MapTest extends Test {
 
 	private J8Map j8Map;

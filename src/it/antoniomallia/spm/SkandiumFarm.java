@@ -41,9 +41,20 @@ public class SkandiumFarm {
 	 * @throws Exception
 	 *             exception for computation
 	 */
-	public Matrix compute(Matrix matrix) throws Exception {
-		Future<Matrix> result = stream.input(matrix);
-		return result.get();
+	public Matrix[] compute(Matrix[] matrices) throws Exception {
+		@SuppressWarnings("unchecked")
+		Future<Matrix>[] futResults = new Future[matrices.length];
+		Matrix[] results = new Matrix[matrices.length];
+		for (int i = 0; i < matrices.length; i++) {
+			matrices[i].augment();
+			futResults[i] = getStream().input(matrices[i]);
+		}
+
+		for (int i = 0; i < matrices.length; i++) {
+			results[i] = futResults[i].get();
+			results[i].diminish();
+		}
+		return results;
 	}
 
 	/**

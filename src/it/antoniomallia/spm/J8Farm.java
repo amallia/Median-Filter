@@ -40,7 +40,7 @@ public class J8Farm {
 	public Matrix[] compute(Matrix[] input) throws Exception {
 		return (Matrix[]) fjPool.submit(
 				() -> Arrays.stream(input).parallel()
-						.map(m -> new ExecuteFilter().execute(m))
+						.map(m ->{ m.augment(); m = new ExecuteFilter().execute(m); m.diminish(); return m;})
 						.toArray(size -> new Matrix[size])).get();
 	}
 
