@@ -1,5 +1,6 @@
 *.png
 *.jpg
+*.xlsx
 .DS_Store
 *.class
 *.jar
