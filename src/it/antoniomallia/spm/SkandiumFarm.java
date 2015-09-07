@@ -35,9 +35,9 @@ public class SkandiumFarm {
 	}
 
 	/**
-	 * @param matrix
-	 *            input matrix
-	 * @return computed matrix using Skandium Map
+	 * @param matrices
+	 *            input matrices array
+	 * @return computed matrices array using Skandium Map
 	 * @throws Exception
 	 *             exception for computation
 	 */
