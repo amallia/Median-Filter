@@ -70,9 +70,16 @@ public class Matrix {
 		return this;
 	}
 	
+	/**
+	 * Augment the matrix with bordered external pixels
+	 */
 	public void augment(){
 		this.matrix=subMatrix(0, getWidth()-1, 0, getHeight()-1).matrix;
 	}
+	
+	/**
+	 * Remove the augmented pixel from the matrix
+	 */
 	public void diminish(){
 		int[][] diminished = new int[getHeight()-2][getWidth()-2];
 		for (int i = 1; i < getHeight()-1; i++) {
