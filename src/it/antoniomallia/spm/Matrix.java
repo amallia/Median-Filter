@@ -174,12 +174,7 @@ public class Matrix {
 		Matrix subMatrix = new Matrix(rowSize + 2, colSize + 2);
 		for (int i = 0; i < colSize + 2; i++) {
 			for (int j = 0; j < rowSize + 2; j++) {
-				if ((i + colStart - 1) < 0
-						|| (i + colStart - 1) > (getHeight() - 1)
-						|| (j + rowStart - 1) < 0
-						|| (j + rowStart - 1) > (getWidth() - 1)) {
-					if ((i + colStart - 1) > (getHeight() - 1)) {
-					}
+
 					int colV = (i + colStart - 1) < 0 ? (i + colStart)
 							: (i + colStart - 1) > (getHeight() - 1) ? (i
 									+ colStart - 2) : i + colStart - 1;
@@ -187,10 +182,7 @@ public class Matrix {
 							: (j + rowStart - 1) > (getWidth() - 1) ? (j
 									+ rowStart - 2) : j + rowStart - 1;
 					subMatrix.matrix[i][j] = matrix[colV][rowV];
-				} else {
-					subMatrix.matrix[i][j] = matrix[i + colStart - 1][j
-							+ rowStart - 1];
-				}
+			
 			}
 		}
 		return subMatrix;
