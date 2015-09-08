@@ -6,6 +6,7 @@
 .project
 .classpath
 bin/
+dist/
 .settings/
 .externalToolBuilders/
 doc/
