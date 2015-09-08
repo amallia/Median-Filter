@@ -8,6 +8,11 @@ package it.antoniomallia.spm;
  */
 public class MergeMatrix {
 
+	/**
+	 * Merge the array of matrices into a single one in a ordered way
+	 * @param matrices array of sub-matrices
+	 * @return assembled matrix
+	 */
 	public Matrix merge(Matrix[] matrices) {
 		int height = 0;
 		for (int i = 0; i < matrices.length; i++) {
@@ -22,7 +27,6 @@ public class MergeMatrix {
 				}
 			}
 		}
-
 		return new Matrix(res);
 	}
 }
