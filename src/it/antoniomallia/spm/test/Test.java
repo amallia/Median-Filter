@@ -6,6 +6,11 @@ import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 
+/**
+ * Abstract class used to execute a test
+ * @author antonio
+ *
+ */
 @Log4j2
 @AllArgsConstructor
 public abstract class Test {
@@ -15,10 +20,25 @@ public abstract class Test {
 	private ExperimentType type;
 	private int threads;
 
+	
+	/**
+	 * Method to compute the array of matrices 
+	 * @param mats Array of matrix inputs
+	 * @return output array of matrices
+	 * @throws Exception Execution exception
+	 */
 	public abstract Matrix[] compute(Matrix[] mats) throws Exception;
 
+	/**
+	 * Method called at the end of the test
+	 */
 	public abstract void shutdown();
 
+	/**
+	 * @param streamsize stream elements number
+	 * @param size size of each element
+	 * @return array of genereated random matrices
+	 */
 	public Matrix[] init(int streamsize, int size) {
 		Matrix[] initmat = new Matrix[streamsize];
 		for (int i = 0; i < streamsize; i++) {

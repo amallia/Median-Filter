@@ -6,14 +6,26 @@ import it.antoniomallia.spm.stats.Experiment.ExperimentType;
 
 import java.util.concurrent.Future;
 
+/**
+ * Class used to extend a test of type Skandium Map
+ * @author antonio
+ *
+ */
 public class SkandiumMapTest extends Test {
 	private SkandiumMap mapreduce;
 
+	/**
+	 * Constructor
+	 * @param threads number of workers of the map
+	 */
 	public SkandiumMapTest(int threads) {
 		super(ExperimentType.SKANDIUM_MAP, threads);
 		mapreduce = new SkandiumMap(threads);
 	}
 
+	/* (non-Javadoc)
+	 * @see it.antoniomallia.spm.test.Test#compute(it.antoniomallia.spm.Matrix[])
+	 */
 	@Override
 	public Matrix[] compute(Matrix[] initmat) throws Exception{
 		@SuppressWarnings("unchecked")
@@ -30,6 +42,9 @@ public class SkandiumMapTest extends Test {
 		return results;
 	}
 
+	/* (non-Javadoc)
+	 * @see it.antoniomallia.spm.test.Test#shutdown()
+	 */
 	@Override
 	public void shutdown() {
 		mapreduce.shutdown();
