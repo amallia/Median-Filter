@@ -4,8 +4,8 @@
 This software is the parallel implementation of a median filter over images. Realized in two different patterns and two implementations for each one. Automatic tests have been realized to obtain performance parameters. Results in terms of performance are in line with the expectation. Future improvements are possible. 
 
 ###Output Example
-![Original Noisy Image](https://github.com/amallia/Median-Filter/raw/master/examples/median-filter-denoised.png)
-![Median Filtered Image](https://github.com/amallia/Median-Filter/raw/master/examples/original-noisy.png)
+<img alt="Original Noisy Image" src="https://github.com/amallia/Median-Filter/raw/master/examples/median-filter-denoised.png" width="240">
+<img alt="Median Filtered Image" src="https://github.com/amallia/Median-Filter/raw/master/examples/original-noisy.png" width="240">
 
 
 ###Report
